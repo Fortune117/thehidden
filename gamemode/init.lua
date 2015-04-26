@@ -159,6 +159,10 @@ function GM:DoPlayerDamageLogic( vic, dmginfo )
 				else
 					if is_killhit then
 						ply:Gore( VectorRand()*10 )
+					else
+						if self.Hidden.GrenadeBlurVision then
+							ply:Blind( self.Hidden.GrenadeBlindDuration, self.Hidden.GrenadeBlindIntensity  )
+						end
 					end
 				end 
 			end

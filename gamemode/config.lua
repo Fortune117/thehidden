@@ -111,6 +111,9 @@ GM.Hidden.MaximumGrenades = 4 //Maximum number of grenades for the Hidden. Defau
 GM.Hidden.GrenadeDamage = 70 //Grenades maximun damage.
 GM.Hidden.GrenadeBlastRadius = 300 //Radius of the grenades explosion.
 GM.Hidden.GrenadeCanDamageSelf = true //Can the Hidden damage himself with grenades? Default: true.
+GM.Hidden.GrenadeBlurVision = true //Should the grenade blur the vision of the people it hits? Default: true.
+GM.Hidden.GrenadeBlindDuration = 8 //Duration of the blind. Default: 8.
+GM.Hidden.GrenadeBlindIntensity = 0.97 //Intensity of the blind. Default: 0.97.
 
  
  --Human Settings
