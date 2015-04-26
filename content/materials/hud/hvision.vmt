@@ -1,0 +1,38 @@
+"Refract"
+{
+ 	"$model" 1
+
+	"Refract_DX60"
+	{
+		"$fallbackmaterial" "hud/hvision_dx6"
+	}
+
+ 	"$refractamount" "0.03"
+ 	"$bluramount" "0.2"
+	"$REFRACTTINT" "{255 215 215}"
+	"$REFRACTTINTtexture" "hud/hvision"
+	"$scale" "[1 1]"
+	"$dudvmap" "dev/water_dudv"
+ 	"$normalmap" "dev/water_normal"
+	"$dudvframe" "0"
+	"$bumpframe" "0"
+	"$translucent" "1"
+	"$forcerefract" 1
+
+"Proxies"
+	{
+		"AnimatedTexture"
+		{
+			"animatedtexturevar" "$dudvmap"
+			"animatedtextureframenumvar" "$dudvframe"
+			"animatedtextureframerate" 30.00
+		}
+
+		"AnimatedTexture"
+		{
+			"animatedtexturevar" "$normalmap"
+			"animatedtextureframenumvar" "$bumpframe"
+			"animatedtextureframerate" 30.00
+		}	
+	}
+}

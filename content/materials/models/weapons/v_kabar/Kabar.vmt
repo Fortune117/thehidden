@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/weapons/v_kabar/Kabar"
+	"$bumpmap" "models/weapons/v_kabar/Kabar_Normal"
+	"$model" 1
+	"$envmap" "env_cubemap"
+	"$envtint" "[.5 .5 .5]"
+	"$normalmapalphaenvmapmask" 1
+
+}

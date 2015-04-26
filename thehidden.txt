@@ -1,0 +1,8 @@
+"thehidden"
+{
+	"base"		"base"
+	"title"		"The Hidden"
+	"maps"		"^ts_|^thestalker_|^hdn_|^ovr_"
+	"menusystem"	"1"
+	"settings"	""
+}

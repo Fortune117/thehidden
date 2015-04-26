@@ -1,0 +1,15 @@
+The Hidden "To Do" List.
+
+1. End round event. DONE
+2. Clock kills, deaths, score, etc. -- DONE
+3. Handle spectators (able to spectate players, etc ) DONE
+4. Spectator hud. DONE
+5. Add the Hiddens stats to the scoreboard. -- DONE
+6. Add Hidden selection options (e.g.  By most damage, by killer, random, etc ) -- DONE
+7. Fix GUI to work with lower resolutions. -- DONE
+8. Add animation translations for Hidden model. -- DONE
+9. Add some more guns. -- DONE
+10. Add some more equipment.
+11. Add captains. -- DONE
+12. Add sounds to UI.
+13. Add Ammo to the HUD -- DONE

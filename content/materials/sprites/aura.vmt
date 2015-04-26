@@ -1,0 +1,29 @@
+"UnLitGeneric"
+{
+	"$spriteorientation" "vp_parallel"
+	"$spriteorigin" "[ 0.25 0.25 ]"
+	"$basetexture"  "sprites/aura"
+	"$additive"     1
+	"$vertexalpha"  1
+	"$ignorez"	    1
+	"$vertexcolor"  1
+	"$angle" 1
+	"$nocull" 1
+
+	"Proxies" 
+     		{ 
+            	"Sine" 
+            	{ 
+			"resultVar"    "$angle" 
+			"sineperiod"   40 
+                  "sinemin"      -175
+			"sinemax"      255
+     			} 
+		
+		      "TextureTransform"
+      		{
+		      "rotateVar" "$angle"
+		      "resultVar" "$basetexturetransform"
+     			}
+		}
+}
