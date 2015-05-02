@@ -8,9 +8,9 @@
 
 //Round/Time settings.
 GM.RoundTime = 300 //Default: 300.
-GM.RoundLimit = 10 //Default: 10.
-GM.RoundEndTime = 10 //Default: 10
-GM.RoundPrepTimeCustom = 30 --Prep time if custom mode is enabled. This is high so the Hidden has time to select his stats. Default: 30.
+GM.RoundLimit = 2  //How many rounds before a map change. Default: 10.
+GM.RoundEndTime = 10 //Default: 10 
+GM.RoundPrepTimeCustom = 20 --Prep time if custom mode is enabled. This is high so the Hidden has time to select his stats. Default: 20.
 GM.RoundPrepTime = 10 --The round prep time if custom mode is disabled. Default: 10.
 
 GM.SlowAmount = 0 //What the host timeframe is set to when the round ends. Set to 0 to disable. Default: 0.
@@ -34,7 +34,7 @@ GM.Hidden.Armor = 0 //Armor that the Hidden starts with. Default: 0.
 GM.Hidden.Alpha = 255 // Alpha channel for the Hiddens colour. Default: 255.
 GM.Hidden.PounceDelay = 0.2 // Delay between pounces in seconds. Default: 0.2.
 GM.Hidden.PounceCost = 25 // How much stamina it takes to pounce. Default: 25.
-GM.Hidden.StaminaDelay = 0.6 // Delay before stamina starts to recharge (after using an ability, e.g. pouncing) in seconds. Default: 0.6.
+GM.Hidden.StaminaDelay = 0.8 // Delay before stamina starts to recharge (after using an ability, e.g. pouncing) in seconds. Default: 0.8.
 GM.Hidden.HangDrain = true // Should hanging onto walls drain stamina? Default: true.
 GM.Hidden.HangDrainSpeed = 2 // Speed at which stamina is drained/sec. Default: 2.
 GM.Hidden.MaxBodyHeal = 4 // Max amount of times the Hidden can heal from a body. Default: 4.
@@ -74,7 +74,7 @@ GM.Hidden.MaxRounds = 3 //Determines how many rounds in a row somone can remain 
 
 
 --Take care editing these. It can, and will, unbalance the game if you don't edit them reasonably.
-GM.Hidden.CustomMode = true //Determines wether or not the hidden can choose to edit their stats at the start of the round. Default: true.
+GM.Hidden.CustomMode = false //Determines wether or not the hidden can choose to edit their stats at the start of the round. Default: true.
 GM.Hidden.AttributePoints = 30 //The amount of ap that the hiddens gets when the round starts.
 GM.Hidden.HealthPerStrength = 5 //How much hp the hidden gets from each point of strength. Default: 5.
 GM.Hidden.BaseHealth = 50 //The base health of the Hidden with no points in strength. Default: 50.
@@ -89,7 +89,7 @@ GM.Hidden.AttackDelayDecreasePerAgility = 0.009 //How much delay is removed betw
 GM.Hidden.BasePounceForce = 450 //Base force of the Hiddens' pounce. Default: 450.
 GM.Hidden.StaminaPerEndurance = 2 //How much extra stamina the hidden gets per point in endurance. Default: 2.
 GM.Hidden.BaseStamina = 80 //How much stamina the hidden has without any points in endurance. Default: 50.
-GM.Hidden.RegenTimePerEndurance = -0.3 //The amount taken away from the stamina regen time per point of endurance. Default: -0.25.
+GM.Hidden.RegenTimePerEndurance = 0.3 //The amount taken away from the stamina regen time per point of endurance. Default: -0.25.
 GM.Hidden.BaseRegenTime = 10 //The base amount of time it takes for the Hiddens' stamina to recharge without any points in endurance. Default: 12.5.
 GM.Hidden.DamageReductionPerEndurance = 0.012 //Percentage of damage that is reduced per point of endurance. Default: 0.012.
 GM.Hidden.BaseDamageReduction = -0.12 //Percentage of damage that is reduced without any points into endurance. Default: -12.
@@ -103,11 +103,15 @@ GM.Hidden.AllowBhop = true //Determines wether or not the Hidden can bunnyhop. D
 
 GM.Hidden.PropKillDamageScale = 1.5 //How much prop damage from the Hidden is scaled. 1 = 100%. Default: 1.5.
 
+//Before editing this stuff:
+//Grenades are important. These allow the Hidden to handle higher amounts of players,
+//which is necessary for larger servers. Before you go getting rid of grenades, realise
+//that the game is already in favour of the Humans.
 //The way this works is this: Number of players / Grenade Ratio. 
 //The number is then rounded down. The result is how many grenades the Hidden starts with, set to 0 to disable.
 GM.Hidden.GrenadeRatio = 3 //Default: 3.
 GM.Hidden.MinimumGrenades = 0 //What the minimum amount of grenades for the Hidden is. Default: 0.
-GM.Hidden.MaximumGrenades = 4 //Maximum number of grenades for the Hidden. Default: 3.
+GM.Hidden.MaximumGrenades = 5 //Maximum number of grenades for the Hidden. Default: 5.
 GM.Hidden.GrenadeDamage = 70 //Grenades maximun damage.
 GM.Hidden.GrenadeBlastRadius = 300 //Radius of the grenades explosion.
 GM.Hidden.GrenadeCanDamageSelf = true //Can the Hidden damage himself with grenades? Default: true.

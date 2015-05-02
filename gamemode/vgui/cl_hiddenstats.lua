@@ -42,34 +42,30 @@ local Presets =
 	[ "The Rogue" ] = { "Fast and with high endurance, The Rouge has low strength but is very hard to catch. Not recommended for beginners.", {4, 13, 13 } }
 } 
  
-function CutUpString( str, len )
+function CutUpString( str, width, font )
 	local str_pieces = {}
-	if string.len( str ) < len then return {str} end
-
-	local strtbl = string.ToTable( str )
-
-	local function sliceString( start )
-		for i = start,#strtbl do
-			if i == start+len then
-				if strtbl[ i ] == " " then
-					str_pieces[ #str_pieces + 1 ] = string.sub( str, start+1, i )
-					return sliceString( i )
-				else
-					for i2 = i,#strtbl do
-						if strtbl[ i2 ] == " " then
-							str_pieces[ #str_pieces + 1 ] = string.sub( str, start+1, i2 )
-							return sliceString( i2 )
-						end
-					end
-				end
-			elseif i == #strtbl then
-				str_pieces[ #str_pieces + 1] = string.sub( str, start+1, #str )
-			end
-		end
-		return str_pieces
+	surface.SetFont( font )
+	local xsz,ysz = surface.GetTextSize( str )
+	if xsz < width then
+		return { str }
 	end
-
-	return sliceString( 0 )
+	local str_table = string.Explode( " ", str )
+	local cur_string = ""
+	for i = 1,#str_table do
+		surface.SetFont( font )
+		local text = i > 1 and cur_string.." "..str_table[ i ] or str_table[ i ]
+		local xsz,ysz = surface.GetTextSize( text )
+		if xsz >= width then
+			str_pieces[ #str_pieces+1 ] = cur_string
+			cur_string = str_table[ i ]
+		else
+			cur_string = text
+		end
+		if i == #str_table then
+			str_pieces[ #str_pieces+1 ] = cur_string
+		end
+	end
+	return str_pieces
 end
 
 
@@ -184,7 +180,9 @@ function OpenHiddenMenu()
 
 		local cutoff_point = math.floor( (presets_panel:GetWide())/letter_w )
 
-		presets_panel.sets[ k ].Desc = CutUpString( v[ 1 ], cutoff_point )
+		local font = ScrW() < 1000 and "HiddenHUDSSSS" or "HiddenHUDSS"
+		local curve = ScrW() < 1500 and 4 or ScrW() < 1000 and 2 or 8
+		presets_panel.sets[ k ].Desc = CutUpString( v[ 1 ], (presets_panel:GetWide() - curve*2) - presets_panel:GetWide()/30, font  )
 		presets_panel.sets[ k ]:Dock( TOP )
 
 		surface.SetFont( "HiddenHUDSS" )
@@ -426,9 +424,9 @@ function OpenHiddenMenu()
 	end
 	
 	local confirm = vgui.Create( "DButton", h_menu )
-	confirm:SetSize( 80, 40 )
+	confirm:SetSize( 100, 40 )
 	confirm:SetPos( h_menu:GetWide()/2 - confirm:GetWide()/2, h_menu:GetTall() - confirm:GetTall() - 12 )
-	confirm:SetText( "Confirm" )
+	confirm:SetText( "" )
 	confirm.DoClick = function()
 		if Points <= 0 then
 			local str, agi, endurance =  h_menu.stats[ 1 ].selected, h_menu.stats[ 2 ].selected, h_menu.stats[ 3 ].selected 
@@ -445,6 +443,13 @@ function OpenHiddenMenu()
 			chat.AddText( Color( 0, 240, 255, 255 ), "You have ", Color( 0, 255, 20, 255), tostring( Points ), Color( 0, 240, 255, 255 ), " unspent points. Spend them first!" )
 		end 
 	end 
+	local curve = 4
+	confirm.Paint = function( self, w, h )
+		--draw.RoundedBox( curve, curve, curve, w - curve*2, h - curve*2, Color( 235, 44, 44, 180 ) )
+		surface.SetFont( "HiddenHUDS")
+		local xsz, ysz = surface.GetTextSize( "Confirm" )
+		draw.GlowingText( "Confirm", "HiddenHUDS", self:GetWide()/2 - xsz/2, self:GetTall()/2 - ysz/2, unpack( white_glow ) )	
+	end
 
 end
 net.Receive( "HiddenStats", OpenHiddenMenu )

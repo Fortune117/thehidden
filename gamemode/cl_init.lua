@@ -2,6 +2,7 @@
 include( 'shared.lua' )
 include( 'config.lua' )
 include( 'tables.lua' )
+include( 'rtv/cl_rtv.lua' )
 include( 'vgui/cl_scoreboard.lua' )
 include( 'vgui/cl_endround.lua' )
 include( 'vgui/cl_hiddenstats.lua' )
@@ -101,8 +102,9 @@ concommand.Add( "hdn_loadout", function( ply )
 	if not ply.LoadOut then
 		ply.LoadOut = vgui.Create( "hdn_loadout" )
 	else
-		--ply.LoadOut:SetVisible( true )
-		ply.LoadOut = vgui.Create( "hdn_loadout" )
+		ply.LoadOut:SetVisible( true )
+		ply.LoadOut:RecreateEquipment()
+		--ply.LoadOut = vgui.Create( "hdn_loadout" )
 	end
 end)
 
@@ -128,6 +130,17 @@ function ToggleHiddenVision()
 		ply:StopLoopingSound( 1 )
 	end
 end
+
+function GM:GetScoreboardIcon( ply )
+
+	if not IsValid(ply) then return false end
+	if ply:SteamID() == "STEAM_0:0:41006378" then return "icon16/cog.png" end --Credit where credit is due.
+	if ply:IsAdmin() then
+		return "icon16/shield.png"
+	end
+	return "icon16/user.png"
+end
+
 
 function GM:PlayerBindPress( ply, bind )
 	if bind == "+menu" then

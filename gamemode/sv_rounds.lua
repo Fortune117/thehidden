@@ -30,6 +30,12 @@ RoundChangeFunctions =
 				
 			end
 
+			for k,v in pairs( plys ) do
+		
+				v:SetCaptain( false )
+				
+			end
+
 		if GAMEMODE.ShouldChangeHidden or GAMEMODE.InitialHidden == false then
 			for k,v in pairs( plys ) do
 		
@@ -77,8 +83,14 @@ RoundChangeFunctions =
 		end
 	end,
 	[ROUND_ENDED] = function()
-		GAMEMODE:SetRoundTime( GAMEMODE.RoundEndTime )
 		SetGlobalBool( "InRound", false )
+		GAMEMODE.RoundLimit = GAMEMODE.RoundLimit - 1
+		if GAMEMODE.RoundLimit <= 0 then
+			RTV.Start()
+			GAMEMODE:SetRoundTime( 35 )
+		else
+			GAMEMODE:SetRoundTime( GAMEMODE.RoundEndTime )
+		end
 	end
 }
 

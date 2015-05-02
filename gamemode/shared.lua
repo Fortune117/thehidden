@@ -40,10 +40,13 @@ function GM:CreateTeams()
 
 end
 
-function GM:PlayerSelectSpawn( ply )
+function GM:PlayerSelectSpawn( ply, failed )
 	local ply_team = ply:Team()
 	local spawns = team.GetSpawnPoints( ply_team )
 	local valid_spawns = {}
+	if failed then
+		return table.Random( spawns )
+	end
 
 	for k,spwn in pairs( spawns ) do
 		local content = util.PointContents( spwn:GetPos() )
@@ -52,7 +55,7 @@ function GM:PlayerSelectSpawn( ply )
 		end
 	end
 	if #valid_spawns < 1 then
-		return self:PlayerSelectSpawn( ply )
+		return self:PlayerSelectSpawn( ply, true )
 	end
 	return table.Random( valid_spawns )
 end

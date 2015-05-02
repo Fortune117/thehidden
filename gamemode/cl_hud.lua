@@ -193,7 +193,7 @@ DrawHud =
 
 	end,
 
-	[ TEAM_SPECTATOR ] = function( ply )
+	[ TEAM_SPECTATOR ] = function( ply ) 
 		local ob = ply:GetObserverTarget()
 
 		if IsValid( ob ) and ob:IsPlayer() then
@@ -206,7 +206,68 @@ DrawHud =
 			local xsz, ysz2 = surface.GetTextSize( nick )
 			draw.GlowingText( nick , "HiddenHUDSS", ScrW()/2 - xsz/2, 15, col, h_colglow, h_colglow2)
 
+			return
+
 		end
+
+		local gm = GAMEMODE
+		local hp = 0
+		local maxhp = ply:GetMaxHealth()
+
+		surface.SetFont( "HiddenHUD" )
+		local xsz, ysz = surface.GetTextSize( hp )
+		draw.GlowingText( hp , "HiddenHUD", x, ScrH()-y-ysz, col, colglow, colglow2)
+
+		local _c_blur = c_blur
+		if hp/maxhp < 0.40 then
+			local pulse =  math.sin( math.rad( CurTime() )*360 ) 
+			local add = (pulse/1*3 ) 
+			_c_blur =  _c_blur + add
+			cross_col = Color( 225*pulse, 225*pulse, 225, 255 )   
+		end
+
+	
+		for i = 1,_c_blur do
+			surface.SetDrawColor( Color( 225*( 1 - i/_c_blur), 225*( 1 - i/_c_blur) , 225, 50*( 1 - i/_c_blur) ) )
+			draw.Cross( c_x , ScrH()-c_y , sz+i*2, t+i*2 )
+		end
+		surface.SetDrawColor( Color( 225, 225, 255, 255 ) )
+		draw.Cross( c_x , ScrH()-c_y , sz, t )
+
+		local bar_w = _xsz + sz + gap + c_blur*2 + sz/2
+		local energy = 100
+		local w = (energy/gm.Hidden.Stamina)*bar_w
+
+		local bar_x = c_x-sz/2 - c_blur
+
+		local stamina_blur = 4
+		for i = 1,stamina_blur do
+			surface.SetDrawColor( Color( 225*( 1 - i/stamina_blur), 225*( 1 - i/stamina_blur) , 225, 50*( 1 - i/stamina_blur) ) )
+			surface.DrawRect( bar_x - i, ScrH() - y + 1 - i , bar_w + i*2, h + i*2 )
+		end
+
+		surface.SetDrawColor( Color( 0, 0, 0, 200) )
+		surface.DrawRect( bar_x, ScrH() - y + 1 , bar_w, h )
+
+		surface.SetDrawColor( Color( 255, 255, 255, 255) )
+		surface.DrawRect( bar_x + bar_w - 2, ScrH() - y + 1, 2, h )
+
+		surface.SetDrawColor( Color( 255, 255, 255, 255) )
+		surface.DrawRect( bar_x, ScrH() - y + 1 , bar_w, h )
+
+		surface.SetDrawColor( Color( 225, 55, 55, 155) )
+		--surface.DrawOutlinedRect( c_x-sz/2 - c_blur - out_gap, ScrH() - y - ysz - out_gap, _w+out_gap*2, ysz + out_gap*2 + h + 2 )
+
+		local text_y = ScrH()-y-ysz
+		local round = GetRoundTranslation()
+		surface.SetFont( "HiddenHUDSS" )
+		local xsz, ysz2 = surface.GetTextSize( round )
+		draw.GlowingText( round, "HiddenHUDSS", bar_x + 4, text_y - ysz2-out_gap, col, colglow, colglow2)
+
+		local time = string.ToMinutesSeconds(gm:GetRoundTime())
+		surface.SetFont( "HiddenHUDSS" )
+		local xsz, ysz2 = surface.GetTextSize( time )
+		draw.GlowingText( time , "HiddenHUDSS", bar_x + total_size - xsz - 11, text_y-ysz2-out_gap, col, colglow, colglow2)
 		
 	end,
 

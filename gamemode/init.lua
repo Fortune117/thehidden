@@ -2,6 +2,7 @@
 AddCSLuaFile( "shared.lua" ) 
 AddCSLuaFile( "tables.lua" )
 AddCSLuaFile( "config.lua" )
+AddCSLuaFile( "rtv/cl_rtv.lua" )
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "vgui/cl_endround.lua" )
 AddCSLuaFile( "vgui/cl_scoreboard.lua" )
@@ -16,6 +17,7 @@ AddCSLuaFile( "default_player.lua" )
 include( "shared.lua" )
 include( "config.lua" )
 include( "tables.lua" )
+include( "rtv/sv_rtv.lua" )
 include( "sv_rounds.lua" )
 include( "sv_player.lua" )
 include( "sv_player_ext.lua" )
@@ -119,9 +121,34 @@ function GM:ApplyDamageFactors( ply, dmginfo )
 	return dmginfo
 end 
 
+function GM:DoHiddenDamageMessages()
+	local damage_total = 0
+	local ply_table = {}
+	for k,ply in pairs( player.GetAll() ) do
+		if ply:GetHiddenDamage() > 0 then
+			ply_table[ #ply_table+1 ] = { ply, ply:GetHiddenDamage() }
+			damage_total = damage_total + ply:GetHiddenDamage()
+		end
+	end
+
+	if #ply_table > 0 then
+		for k,v in pairs( ply_table ) do
+			local ply = v[ 1 ]
+			local damage = v[ 2 ]
+			local print_damage = math.Round( damage, 4 )
+			local chance = math.Round(damage/damage_total, 2)*100
+			local a = string.sub( tostring( print_damage ), 0, 1 ) == "8" and "an" or "a"
+			ply:PrintMessage( HUD_PRINTTALK, "You dealt "..print_damage.." damage to the Hidden and have "..a.." "..chance.."% chance of becoming the Hidden next round." )
+		end
+	end
+end
+
 function GM:OnHiddenDeath( hdn, atk, dmginfo )
 	atk:SetNWBool( "HiddenKiller", true )
 	self.ShouldChangeHidden = true
+	if self.Hidden.SelectMode == 3 then
+		self:DoHiddenDamageMessages()
+	end 
 	hook.Call( "HDN_OnHiddenDeath", self, hdn, atk, dmginfo )
 end
 
@@ -532,7 +559,7 @@ function GM:Think()
 		end
 	end
 	
-end
+end	
 
 concommand.Add( "hdn_debug_invis", function( ply ) 
 	if ply:IsAdmin() then

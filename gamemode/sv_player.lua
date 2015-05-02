@@ -124,12 +124,12 @@ end
 function PLY:Pounce()
 
 	local gm_hdn = GAMEMODE.Hidden
-	if self:GetStamina() > gm_hdn.PounceCost then
+	if self:GetStamina() >= gm_hdn.PounceCost then
 
+		self:EmitSound( "npc/fast_zombie/claw_miss"..math.random(1,2)..".wav", 75, 100, 0.1 )
 		self:SetPos( self:GetPos() + Vector(0, 0, 1 ) )
 		local dir = self:GetAimVector()
 		self:SetVelocity( dir*gm_hdn.PounceForce + Vector( 0, 0, 200 ) )
-		self:EmitSound( "npc/fast_zombie/claw_miss"..math.Rand(1,2)..".wav", 75, 100, 0.4 )
 		self:AddStamina( -gm_hdn.PounceCost ) 
 
 		if not gm_hdn.AllowBhop then

@@ -379,6 +379,18 @@ function PANEL:Init()
 	self.Equipment1:SetSize( e_w, e_h )
 	self.Equipment1:SetPos( padding, padding + w_h + 35 )
 	self.Equipment1.Selected = 0
+	self.Equipment1.PaintOver = function( self, w, h )
+
+		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
+			surface.SetDrawColor( Color( 11, 11, 11, 250 ) )
+			surface.DrawRect( 0, 0, w, h )
+
+			local text = "Disabled while round is in progress."
+			surface.SetFont( "HiddenHUDSS" )
+			local xsz, ysz = surface.GetTextSize( text )
+			draw.GlowingText( text, "HiddenHUDSS", w/2 - xsz/2, h/2 - ysz/2, unpack( white_glow ) )
+		end
+	end
 
 
 	local label = vgui.Create( "DPanel", self.Equipment1 )
@@ -400,10 +412,15 @@ function PANEL:Init()
 		equipment.Blur = 1
 		equipment.MaxBlur = 2
 		equipment.TargBlur = 1
-		equipment.Alpha = 200
+		equipment.Alpha = 80
 		equipment.MaxAlpha = 255
 		equipment.TargAlpha = equipment.Alpha
 		equipment:SetToolTip( v.desc )
+		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
+			equipment:SetEnabled( false )
+			equipment.MaxAlpha = 80
+		end
+
 
 		local tick = Material( "icon16/tick.png", "noclamp smooth" )
 		local cross = Material( "icon16/cross.png", "noclamp smooth" )
@@ -470,6 +487,18 @@ function PANEL:Init()
 	self.Equipment2:SetSize( e_w, e_h )
 	self.Equipment2:SetPos( w - padding - e_w, padding + w_h + 35 )
 	self.Equipment2.Selected = 0
+	self.Equipment2.PaintOver = function( self, w, h )
+
+		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
+			surface.SetDrawColor( Color( 11, 11, 11, 250 ) )
+			surface.DrawRect( 0, 0, w, h )
+
+			local text = "Disabled while round is in progress."
+			surface.SetFont( "HiddenHUDSS" )
+			local xsz, ysz = surface.GetTextSize( text )
+			draw.GlowingText( text, "HiddenHUDSS", w/2 - xsz/2, h/2 - ysz/2, unpack( white_glow ) )
+		end
+	end
 
 	local label = vgui.Create( "DPanel", self.Equipment2 )
 	label:SetSize( e_w, 30 )
@@ -491,10 +520,14 @@ function PANEL:Init()
 		equipment.Blur = 1
 		equipment.MaxBlur = 2
 		equipment.TargBlur = 1
-		equipment.Alpha = 200
+		equipment.Alpha = 80
 		equipment.MaxAlpha = 255
 		equipment.TargAlpha = equipment.Alpha
 		equipment:SetToolTip( v.desc )
+		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
+			equipment:SetEnabled( false )
+			equipment.MaxAlpha = 80
+		end
 
 		local tick = Material( "icon16/tick.png", "noclamp smooth" )
 		local cross = Material( "icon16/cross.png", "noclamp smooth" )
@@ -557,6 +590,192 @@ function PANEL:Init()
 	end
 
 	
+end
+
+function PANEL:RecreateEquipment()
+	surface.PlaySound( "buttons/light_power_on_switch_01.wav" )
+	local w,h = ScrW()/3,ScrH()/2
+	local w_w,w_h =  w/2.5, h/2 
+	local e_w,e_h = w_w, h-w_h-100
+	local border = 4
+	self.Equipment1:Clear()
+
+	local label = vgui.Create( "DPanel", self.Equipment1 )
+	label:SetSize( e_w, 30 )
+	label:Dock( TOP )
+	label:DockMargin( 5, -5, 5, 5 )
+	label.Paint = function( mem, _w, _h )
+		surface.SetFont( "HiddenHUDSS" )
+		local xsz, ysz = surface.GetTextSize( "Primary Equipment" )
+		draw.GlowingText( "Primary Equipment", "HiddenHUDSS", _w/2 - xsz/2, _h/2 - ysz/2, unpack( blue_glow ) )
+	end
+
+	for k,v in pairs( LDT.Equipment ) do
+		local equipment = vgui.Create( "DButton", self.Equipment1 )
+		equipment:SetSize( e_w, math.max( e_h/5.6, 30 )  )
+		equipment:SetText( "" )
+		equipment:Dock( TOP )
+		equipment:DockMargin( 5, -5, 5, 5 )
+		equipment.Blur = 1
+		equipment.MaxBlur = 2
+		equipment.TargBlur = 1
+		equipment.Alpha = 80
+		equipment.MaxAlpha = 255
+		equipment.TargAlpha = equipment.Alpha
+		equipment:SetToolTip( v.desc )
+		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
+			equipment:SetEnabled( false )
+			equipment.MaxAlpha = 80
+		end
+
+
+		local tick = Material( "icon16/tick.png", "noclamp smooth" )
+		local cross = Material( "icon16/cross.png", "noclamp smooth" )
+		equipment.Paint = function( mem, _w, _h )
+			draw.BlurredBar( border, border, _w-border*2, _h-border*2, mem.Blur, Color( 44, 44, 44, mem.Alpha )   )
+
+			local font = ScrW() < 1500 and "HiddenHUDSSS" or "HiddenHUDSS"
+			surface.SetFont( font )
+			local xsz, ysz = surface.GetTextSize( k )
+			draw.GlowingText( k, font, _w/2 - xsz/2, _h/2 - ysz/2, unpack( blue_glow ) )
+
+			local sz = ( _h-12 ) 
+			surface.SetDrawColor( Color( 88, 88, 88, 255 ) )
+			surface.DrawOutlinedRect( _w - sz - 6, 6, sz, sz ) 
+
+			--surface.SetDrawColor( Color( 44, 44, 44, 255 ) )
+			local mat = self.Equipment1.Selected == k and tick or cross
+			surface.SetMaterial( mat )
+			surface.DrawTexturedRect( _w - sz - 6, 6, sz, sz )
+		end
+
+		equipment.Think = function( self )
+			if self:Get() == k then
+				self.Blur = math.Approach( self.Blur, self.MaxBlur, 0.2 )
+				self.Alpha = math.Approach( self.Alpha, self.MaxAlpha, 2 )
+			else
+				self.Blur = math.Approach( self.Blur, self.TargBlur, 0.2 )
+				self.Alpha = math.Approach( self.Alpha, self.TargAlpha, 2 )
+			end
+		end
+
+		equipment.OnCursorEntered = function( self )
+			self.TargBlur = self.MaxBlur
+			self.TargAlpha = self.MaxAlpha
+			surface.PlaySound( "buttons/button22.wav" )
+		end
+		
+		equipment.OnCursorExited = function( self )
+			self.TargBlur = 1
+			self.TargAlpha = 80
+		end 
+
+		equipment.Set = function( num )
+			self.Equipment1.Selected = num
+		end
+	
+		equipment.Get = function()
+			return self.Equipment1.Selected
+		end
+	
+
+		equipment.DoClick = function()
+			equipment.Set( k )
+			net.Start( "SelectEquipment" )
+				net.WriteString( v.name )
+			net.SendToServer()
+			surface.PlaySound( "buttons/combine_button1.wav" )
+		end  
+
+	end
+
+	self.Equipment2:Clear()
+	local label = vgui.Create( "DPanel", self.Equipment2 )
+	label:SetSize( e_w, 30 )
+	label:Dock( TOP )
+	label:DockMargin( 5, -5, 5, 5 )
+	label.Paint = function( mem, _w, _h )
+		surface.SetFont( "HiddenHUDSS" )
+		local xsz, ysz = surface.GetTextSize( "Secondary Equipment" )
+		draw.GlowingText( "Secondary Equipment", "HiddenHUDSS", _w/2 - xsz/2, _h/2 - ysz/2, unpack( blue_glow ) )
+	end
+	for k,v in pairs( LDT.Equipment2 ) do
+		local equipment = vgui.Create( "DButton", self.Equipment2 )
+		equipment:SetSize( e_w, math.max( e_h/5.6, 30 ) )
+		equipment:SetText( "" )
+		equipment:Dock( TOP )
+		equipment:DockMargin( 5, -5, 5, 5 )
+		equipment.Blur = 1
+		equipment.MaxBlur = 2
+		equipment.TargBlur = 1
+		equipment.Alpha = 80
+		equipment.MaxAlpha = 255
+		equipment.TargAlpha = equipment.Alpha
+		equipment:SetToolTip( v.desc )
+		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
+			equipment:SetEnabled( false )
+			equipment.MaxAlpha = 80
+		end
+
+		local tick = Material( "icon16/tick.png", "noclamp smooth" )
+		local cross = Material( "icon16/cross.png", "noclamp smooth" )
+		equipment.Paint = function( mem, _w, _h )
+			draw.BlurredBar( border, border, _w-border*2, _h-border*2, mem.Blur, Color( 44, 44, 44, mem.Alpha )   )
+
+			local font = ScrW() < 1500 and "HiddenHUDSSS" or "HiddenHUDSS"
+			surface.SetFont( font )
+			local xsz, ysz = surface.GetTextSize( k )
+			draw.GlowingText( k, font, _w/2 - xsz/2, _h/2 - ysz/2, unpack( blue_glow ) )
+
+			local sz = ( _h-12 ) 
+			surface.SetDrawColor( Color( 88, 88, 88, 255 ) )
+			surface.DrawOutlinedRect( _w - sz - 6, 6, sz, sz ) 
+
+			--surface.SetDrawColor( Color( 44, 44, 44, 255 ) )
+			local mat = self.Equipment2.Selected == k and tick or cross
+			surface.SetMaterial( mat )
+			surface.DrawTexturedRect( _w - sz - 6, 6, sz, sz )
+		end
+
+		equipment.Think = function( self )
+			if self:Get() == k then
+				self.Blur = math.Approach( self.Blur, self.MaxBlur, 0.2 )
+				self.Alpha = math.Approach( self.Alpha, self.MaxAlpha, 2 )
+			else
+				self.Blur = math.Approach( self.Blur, self.TargBlur, 0.2 )
+				self.Alpha = math.Approach( self.Alpha, self.TargAlpha, 2 )
+			end
+		end
+
+		equipment.OnCursorEntered = function( self )
+			self.TargBlur = self.MaxBlur
+			self.TargAlpha = self.MaxAlpha
+			surface.PlaySound( "buttons/button22.wav" )
+		end
+		
+		equipment.OnCursorExited = function( self )
+			self.TargBlur = 1
+			self.TargAlpha = 80
+		end 
+
+		equipment.Set = function( num )
+			self.Equipment2.Selected = num
+		end
+	
+		equipment.Get = function()
+			return self.Equipment2.Selected
+		end
+	
+
+		equipment.DoClick = function()
+			equipment.Set( k )
+			net.Start( "SelectEquipment2" )
+				net.WriteString( v.name )
+			net.SendToServer()
+			surface.PlaySound( "buttons/combine_button1.wav" )
+		end 
+
+	end
 end
 
 local scan_h = 3

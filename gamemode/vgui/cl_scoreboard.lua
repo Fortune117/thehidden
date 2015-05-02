@@ -52,7 +52,6 @@ function CreatePlayer( ply, ply_team, is_alive )
 	local ply_pnl = vgui.Create( "DPanel", players_panel )
 	ply_pnl:SetSize( players_col:GetWide(), players_panel:GetTall()/8 )
 	ply_pnl:Dock( TOP )
-
 	local gap = (ply_pnl:GetWide()/#scores)
 	function ply_pnl:Paint( w, h )
 
