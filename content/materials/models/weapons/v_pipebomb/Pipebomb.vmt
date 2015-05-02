@@ -1,8 +1,0 @@
-"VertexLitGeneric"
-{
-	"$basetexture" "models/weapons/v_pipebomb/Pipebomb"
-	"$bumpmap" "models\weapons\v_pipebomb\Pipebomb_Normal"
-	"$envmap" "env_cubemap"
-	"$envtint" "[.2 .2 .2]"
-	"$normalmapalphaenvmapmask" 1
-}

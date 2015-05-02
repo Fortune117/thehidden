@@ -13,6 +13,7 @@ RTV.Prefixes =
 	"thestalker_",
 	"stalker_",
 	"de_",
+	"dm_",
 	"cs_"
 }
 RTV.Enabled = true

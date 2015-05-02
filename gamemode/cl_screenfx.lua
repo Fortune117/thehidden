@@ -63,7 +63,9 @@ function GM:DrawHiddenScreen( ply )
 
 	render.UpdateScreenEffectTexture()
 	render.SetMaterial( mat )
-	render.DrawScreenQuad()
+	if surface.GetTextureID( "hud/hvision") then
+		render.DrawScreenQuad()
+	end
 end 
 
 function GM:DrawHumanScreen( ply )

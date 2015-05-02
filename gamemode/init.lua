@@ -9,6 +9,7 @@ AddCSLuaFile( "vgui/cl_scoreboard.lua" )
 AddCSLuaFile( "vgui/cl_hiddenstats.lua" )
 AddCSLuaFile( "vgui/cl_taunt.lua" )
 AddCSLuaFile( "vgui/cl_loadout.lua" )
+AddCSLuaFile( "vgui/cl_helpmenu.lua" )
 AddCSLuaFile( "cl_screenfx.lua" )
 AddCSLuaFile( "cl_hud.lua" )
 AddCSLuaFile( "sh_loadout.lua" )
@@ -37,19 +38,6 @@ util.AddNetworkString( "ToggleHiddenVision" )
 util.AddNetworkString( "TellHiddenStats" )
 util.AddNetworkString( "DoEndRoundScreen" )
 util.AddNetworkString( "TimeSlowSound" )
-
-function AddDir(dir) // recursively adds everything in a directory to be downloaded by client  
-	local files, directories = file.Find( dir.."/*", "GAME")
-	for k,v in pairs( files ) do
-		resource.AddFile(dir.."/"..v)
-		print( "[FAST DL] Adding "..v.." to FastDL.")
-	end
-
-	for k,v in pairs( directories ) do
-		AddDir( dir.."/"..v )
-	end
-end
-AddDir( "gamemodes/thehidden/content")
 
 GM.ShouldChangeHidden = false
 GM.InitialHidden = false

@@ -8,6 +8,7 @@ include( 'vgui/cl_endround.lua' )
 include( 'vgui/cl_hiddenstats.lua' )
 include( 'vgui/cl_loadout.lua' )
 include( 'vgui/cl_taunt.lua' )
+include( 'vgui/cl_helpmenu.lua' )
 include( 'cl_screenfx.lua' )
 include( 'cl_hud.lua' )
 include( 'sh_loadout.lua' )
@@ -81,7 +82,6 @@ function draw.BlurredBar( x, y, w, h, b, clr )
 end
 
 
-
 local PLY = FindMetaTable( "Player" )
 
 function PLY:GetInt( name, default )
@@ -106,6 +106,10 @@ concommand.Add( "hdn_loadout", function( ply )
 		ply.LoadOut:RecreateEquipment()
 		--ply.LoadOut = vgui.Create( "hdn_loadout" )
 	end
+end)
+
+concommand.Add( "hdn_helpmenu", function( ply )
+	local HelpMenu = vgui.Create( "hdn_helpmenu" )
 end)
 
 function GM:Think()
