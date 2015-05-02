@@ -43,3 +43,5 @@ HDN_OnRoundChange( State ) Called whenver the round changes state. State can be 
 HDN_OnWin( Winning Team ) Called when the round is won.
 
 OnLoadoutGiven( Player, Weapon Classname ) Called when a player is given their primary weapon.
+
+My Steam: http://steamcommunity.com/profiles/76561198042278484/
