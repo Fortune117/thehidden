@@ -8,7 +8,7 @@
 
 //Round/Time settings.
 GM.RoundTime = 300 //Default: 300.
-GM.RoundLimit = 2  //How many rounds before a map change. Default: 10.
+GM.RoundLimit = 10  //How many rounds before a map change. Default: 10.
 GM.RoundEndTime = 10 //Default: 10 
 GM.RoundPrepTimeCustom = 20 --Prep time if custom mode is enabled. This is high so the Hidden has time to select his stats. Default: 20.
 GM.RoundPrepTime = 10 --The round prep time if custom mode is disabled. Default: 10.
