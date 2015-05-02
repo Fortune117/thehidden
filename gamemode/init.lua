@@ -38,6 +38,19 @@ util.AddNetworkString( "TellHiddenStats" )
 util.AddNetworkString( "DoEndRoundScreen" )
 util.AddNetworkString( "TimeSlowSound" )
 
+function AddDir(dir) // recursively adds everything in a directory to be downloaded by client  
+	local files, directories = file.Find( dir.."/*", "GAME")
+	for k,v in pairs( files ) do
+		resource.AddFile(dir.."/"..v)
+		print( "[FAST DL] Adding "..v.." to FastDL.")
+	end
+
+	for k,v in pairs( directories ) do
+		AddDir( dir.."/"..v )
+	end
+end
+AddDir( "gamemodes/thehidden/content")
+
 GM.ShouldChangeHidden = false
 GM.InitialHidden = false
 GM.HiddenRounds = 0
