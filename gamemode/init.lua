@@ -299,11 +299,11 @@ local hidden_select_funcs =
 			if ply:GetHiddenDamage() > 0 then
 				ply_table[ #ply_table+1 ] = { ply, previous_damage + 1, previous_damage + ply:GetHiddenDamage() }
 				damage_total = damage_total + ply:GetHiddenDamage()
-				previous_damage = ply:GetHiddenDamage()
+				previous_damage = previous_damage + ply:GetHiddenDamage()
 			end
 		end
 
-		local rand = math.Rand( 1, damage_total )
+		local rand = math.random( 1, damage_total )
 		for i = 1,#ply_table do
 			if rand >= ply_table[ i ][ 2 ] and rand <= ply_table[ i ][ 3 ] then
 				ply_table = { ply_table[ i ][ 1 ] }
