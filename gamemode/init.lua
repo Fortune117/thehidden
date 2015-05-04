@@ -307,6 +307,7 @@ local hidden_select_funcs =
 		for i = 1,#ply_table do
 			if rand >= ply_table[ i ][ 2 ] and rand <= ply_table[ i ][ 3 ] then
 				ply_table = { ply_table[ i ][ 1 ] }
+				break
 			end
 		end
 
