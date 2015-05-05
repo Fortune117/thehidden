@@ -1,7 +1,4 @@
--- simple unloack effect :/
-
---Initializes the effect. The data is a table of data 
---which was passed from the server.
+AddCSLuaFile()
 
 function EFFECT:Init( data )
 	
