@@ -7,8 +7,8 @@ SetGlobalInt( "RoundTime", 0 )
 function GM:SetRoundTime( time )
 	SetGlobalInt( "RoundTime", math.Round( CurTime() + time ) )
 end
- 
-RoundChangeFunctions =    
+
+RoundChangeFunctions =
 {
 	[ROUND_WAITING] = function()
 		GAMEMODE:SetRoundTime( 0 )
@@ -24,27 +24,27 @@ RoundChangeFunctions =
 		local plys = player.GetAll()
 
 			for k,v in pairs( team.GetPlayers( TEAM_SPECTATOR ) ) do
-		
+
 				v:SetTeam( TEAM_HUMAN )
 				v:SetCaptain( false )
-				
+
 			end
 
 			for k,v in pairs( plys ) do
-		
+
 				v:SetCaptain( false )
-				
+
 			end
 
 		if GAMEMODE.ShouldChangeHidden or GAMEMODE.InitialHidden == false then
 			for k,v in pairs( plys ) do
-		
+
 				v:SetTeam( TEAM_HUMAN )
 				v:SetCaptain( false )
-				
+
 			end
-		
-		-- local randomguy = Entity( 1 )  
+
+		-- local randomguy = Entity( 1 )
 			GAMEMODE:SelectNewHidden()
 			GAMEMODE.InitialHidden = true
 		end
@@ -68,7 +68,7 @@ RoundChangeFunctions =
 		end
 
 		for k,v in pairs( plys ) do
-			v:Spawn() 
+			v:Spawn()
 			v:Freeze( true )
 		end
 
@@ -99,8 +99,22 @@ function GM:OnRoundChange( state )
 	hook.Call( "HDN_OnRoundChange", self, state )
 end
 
+hook.Add( "HDN_OnRoundChange", "CleanupWeapons", function()
+	print("hello")
+	local items = ents.FindByClass('item_*')
+	local weapons = ents.FindByClass('weapon_*')
+
+	for k, v in pairs(items) do
+		v:Remove()
+	end
+
+	for k, v in pairs(weapons) do
+		v:Remove()
+	end
+end)
+
 function GM:SetRoundState( state )
-	SetGlobalInt( "RoundState", state )  
+	SetGlobalInt( "RoundState", state )
 	self:OnRoundChange( state )
 end
 
@@ -118,7 +132,7 @@ function GM:DoEndRoundScreen( team, team_name )
 		self.IsSlowed = true
 		self.SlowTime = CurTime() + (3*(self.SlowAmount > 0 and self.SlowAmount or 1 ) )
 	end
-	
+
 end
 
 function GM:OnWin( winner )
@@ -191,3 +205,15 @@ function GM:RoundThink()
 	RoundFunctions[ self:GetRoundState() ]( self )
 end
 
+function GM:PostCleanupMap()
+	local items = ents.FindByClass('item_*')
+	local weapons = ents.FindByClass('weapon_*')
+
+	for k, v in pairs(items) do
+		v:Remove()
+	end
+
+	for k, v in pairs(weapons) do
+		v:Remove()
+	end
+end
