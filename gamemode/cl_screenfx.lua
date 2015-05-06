@@ -194,7 +194,11 @@ function GM:HiddenVisionThink()
 					local effect = EffectData()
 					effect:SetOrigin( v:GetPos() )
 					effect:SetEntity( v )
+<<<<<<< HEAD
 					util.Effect( "hdn_vision", effect )
+=======
+					util.Effect( "HDN_Vision", effect, true, true  )
+>>>>>>> origin/master
 				end
 			end
 		else
@@ -203,7 +207,11 @@ function GM:HiddenVisionThink()
 					local effect = EffectData()
 					effect:SetOrigin( v:GetPos() )
 					effect:SetEntity( v )
+<<<<<<< HEAD
 					util.Effect( "hdn_vision", effect )
+=======
+					util.Effect( "HDN_Vision", effect, true, true )
+>>>>>>> origin/master
 				end
 			end
 		end

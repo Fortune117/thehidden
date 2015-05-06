@@ -1,8 +1,11 @@
--- simple unloack effect :/
+AddCSLuaFile()
 
+<<<<<<< HEAD
 --Initializes the effect. The data is a table of data 
 --which was passed from the server.
 
+=======
+>>>>>>> origin/master
 function EFFECT:Init( data )
 	
 	self.Position = data:GetOrigin()
