@@ -87,6 +87,8 @@ function ENT:BreakRemove()
 end
 
 function ENT:OnTakeDamage( dmginfo )
+	local atk = dmginfo:GetAttacker()
+	if not atk:IsPlayer() or not atk:IsHidden() then return end 
    self:TakePhysicsDamage(dmginfo)
    
 	if IsValid(self) then

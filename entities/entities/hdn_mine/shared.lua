@@ -112,7 +112,9 @@ end
 
 
 function ENT:OnTakeDamage( dmginfo )
-   self:TakePhysicsDamage(dmginfo)
+	local atk = dmginfo:GetAttacker()
+	if not atk:IsPlayer() or not atk:IsHidden() then return end 
+   	self:TakePhysicsDamage(dmginfo)
    
 	if IsValid(self) then
 		if dmginfo:GetDamageType() == DMG_BLAST or dmginfo:GetDamageType() == DMG_BURN then
