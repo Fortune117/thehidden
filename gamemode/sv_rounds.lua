@@ -100,7 +100,6 @@ function GM:OnRoundChange( state )
 end
 
 hook.Add( "HDN_OnRoundChange", "CleanupWeapons", function()
-	print("hello")
 	local items = ents.FindByClass('item_*')
 	local weapons = ents.FindByClass('weapon_*')
 

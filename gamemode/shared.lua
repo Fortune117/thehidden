@@ -55,7 +55,7 @@ function GM:PlayerSelectSpawn( ply, failed )
 		end
 	end
 	if #valid_spawns < 1 then
-		return table.random( spawns )
+		return table.Random( spawns )
 	end
 	return table.Random( valid_spawns )
 end
