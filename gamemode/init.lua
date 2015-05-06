@@ -181,6 +181,7 @@ function GM:DoPlayerDamageLogic( vic, dmginfo )
 
 		if ply:IsHidden() then
 			if atk:IsPlayer() then
+				if atk:IsHidden() then return end 
 				atk:AddHiddenDamage( dmginfo:GetDamage() )
 				ply:HiddenDamageSounds( is_killhit )
 				if is_killhit then

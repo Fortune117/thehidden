@@ -7,7 +7,6 @@ v1.02
 -Added options for hidden damage reduction that scales with players.
 -Added options for hidden damage increase that scales with players.
 -Numerous bug fixes.
-	o Fixed scoreboard erroring 
 -Small weapon improvements.
 -Fixed weapon spawning on hl2 deathmatch maps.
 -Fixed Hidden Vision
