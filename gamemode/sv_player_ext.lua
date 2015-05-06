@@ -18,7 +18,7 @@ function GM:OnStaminaChange( ply, old, new )
 	hook.Call( "HDN_OnStaminaChange", self, ply, old, new )
 end
 
-function PLY:Heal( num )
+function PLY:Heal( num ) 
 	self:SetHealth( math.min( self:Health() + num, self:GetMaxHealth() ) )
 	GAMEMODE:OnPlayerHealed( self, num )
 end

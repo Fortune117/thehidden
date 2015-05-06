@@ -44,7 +44,7 @@ function GM:PlayerSelectSpawn( ply, failed )
 	local ply_team = ply:Team()
 	local spawns = team.GetSpawnPoints( ply_team )
 	local valid_spawns = {}
-	if failed then
+	if failed then 
 		return table.Random( spawns )
 	end
 

@@ -257,7 +257,7 @@ PlayerThinkFuncs =
 			if CurTime() - ply.LastJump > 0.05 and ply:IsOnGround() then
 				ply.BunnyHopping = false
 			end
-		end
+		end 
 
 	end,
 	[ TEAM_HUMAN ] = function( ply )

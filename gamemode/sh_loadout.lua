@@ -150,7 +150,7 @@ LDT.Equipment2 =
 }
  
 for k,v in pairs( LDT.Equipment ) do 
-	if istable( v.hooks ) then
+	if istable( v.hooks ) then 
 		for i = 1,#v.hooks do
 			hook.Add( v.hooks[ i ], v.name, v.funcs[ i ] )
 		end

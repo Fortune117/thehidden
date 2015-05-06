@@ -374,11 +374,11 @@ local function AlivePlayers()
 
 	return pool
 
-end
+end 
 
 local function NextPlayer( ply )
 
-	local plys = AlivePlayers()
+	local plys = AlivePlayers() 
 
 	if #plys < 1 then return nil end
 	if not IsValid(ply) then return plys[1] end
@@ -612,4 +612,3 @@ concommand.Add( "hdn_debug_damage", function( ply )
 		ply:TakeDamage( 9 )
 	end
 end)
-

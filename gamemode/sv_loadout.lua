@@ -15,7 +15,7 @@ function PLY:SetEquipment2( equip )
 	self.Equipment[ 2 ] = equip
 	self:SetNWString( "Equipment2", equip )
 end
-
+ 
 function PLY:SetSelectedWeapon( wep )
 	self.SelectedWeapon = wep
 end

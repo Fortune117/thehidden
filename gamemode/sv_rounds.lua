@@ -94,7 +94,7 @@ RoundChangeFunctions =
 	end
 }
 
-function GM:OnRoundChange( state )
+function GM:OnRoundChange( state ) 
 	RoundChangeFunctions[ state ]()
 	hook.Call( "HDN_OnRoundChange", self, state )
 end
@@ -108,6 +108,7 @@ hook.Add( "HDN_OnRoundChange", "CleanupWeapons", function()
 	end
 
 	for k, v in pairs(weapons) do
+		if v:IsWeapon() then continue end 
 		v:Remove()
 	end
 end)

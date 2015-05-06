@@ -218,6 +218,7 @@ function GM:PostPlayerDraw( )
 			if IsValid( ply ) and ply:Alive() and ply != LocalPlayer() then
 
 				local head = ply:LookupBone("ValveBiped.Bip01_Head1")
+				if not head then return end 
 				local headpos,headang = ply:GetBonePosition(head)
 
 				local offset = Vector( 0, 0, 15 )
