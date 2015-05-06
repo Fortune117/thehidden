@@ -97,7 +97,7 @@ TeamSetUp =
 		ply:SetRenderMode( RENDERMODE_TRANSALPHA )
 	 	ply:SetColor( Color( 255, 255, 255, plyInfo.Alpha ) )
 
-		ply:SetMaterial( "sprites/heatwave" )
+		ply:SetMaterial( plyInfo.Material )
 		ply:DrawShadow( false )
 		ply:SetAvoidPlayers( false )
 		hook.Call( "HDN_OnHiddenSpawn", GAMEMODE, ply )

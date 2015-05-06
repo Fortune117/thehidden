@@ -41,20 +41,35 @@ SWEP.BobScale = 1
 
 if CLIENT then
 	local Mat = Material( "sprites/hdn_crosshairs", "noclamp smooth" )
-
+	local col = Color( 235, 235, 235, 255 )
+	local h_colglow = Color( 235, 235, 235, 255 )
+	local h_colglow2 = Color( 235, 235/2, 235/2, 255 )
 	local cross_sz = 90
 	function SWEP:DrawHUD()
 		surface.SetDrawColor( Color( 255, 100, 100, 255 ) )
 		surface.SetMaterial( Mat )
 		surface.DrawTexturedRectUV( ScrW()/2 - cross_sz/2, ScrH()/2 - cross_sz/2, cross_sz, cross_sz, 0.5, 0.5, 0, 1 )
+
+		surface.SetFont( "HiddenHUD" )
+		local xsz, ysz = surface.GetTextSize( self.Grenades )
+		draw.GlowingText( self.Grenades , "HiddenHUD", ScrW() - xsz*2, ScrH() - ysz, col, h_colglow, h_colglow2)
 	end	
 end
 
 function SWEP:Initialize()
 	self:SetWeaponHoldType( self.HoldType )
 	local nades = math.floor( math.Clamp( #player.GetAll()/GAMEMODE.Hidden.GrenadeRatio, GAMEMODE.Hidden.MinimumGrenades, GAMEMODE.Hidden.MaximumGrenades ) )
-	self.Grenades = nades
+	self:SetGrenades( nades )
 	self:SetDeploySpeed( 1 )
+end
+
+function SWEP:GetGrenades()
+	return self:GetNWInt( "Grenades", 0 )
+end
+
+function SWEP:SetGrenades( count )
+	self.Grenades = count
+	self:SetNWInt( "Grenades", count )
 end
 
 function SWEP:Deploy()
@@ -132,7 +147,7 @@ function SWEP:ThrowGrenade()
 
 	local thr = vfw * vel + ply:GetVelocity()
 	self:CreateGrenade( ply, Angle( 0, 0, 0 ), src, thr )
-	self.Grenades = self.Grenades - 1
+	self:SetGrenades( self:GetGrenades() - 1 )
 	if self.Grenades <= 0 then
 		self:Remove()
 		return

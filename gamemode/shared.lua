@@ -55,7 +55,7 @@ function GM:PlayerSelectSpawn( ply, failed )
 		end
 	end
 	if #valid_spawns < 1 then
-		return self:PlayerSelectSpawn( ply, true )
+		return table.random( spawns )
 	end
 	return table.Random( valid_spawns )
 end
@@ -168,7 +168,6 @@ end
 
 function util.GetLivingPlayers(class)
    local count = 0
-   
    for k, v in ipairs(team.GetPlayers(class)) do
       if (v:Alive() and v:GetObserverMode() == OBS_MODE_NONE) then
          count = count + 1

@@ -3,18 +3,6 @@
 --Initializes the effect. The data is a table of data 
 --which was passed from the server.
 
-		
-local params = {}
-params[ "$basetexture" ] = "sprites/aura"
-params[ "$vertexcolor" ] = 1
-params[ "$vertexalpha" ] = 1
-params[ "$angle" ] = 1
-params[ "$ignorez" ] = 1
-params[ "$additive" ] = 1
-params[ "$spriteorigin" ] = "[ 0.25 0.25 ]"
-params[ "$spriteorientation" ] = "vp_parallel"
-
-local aura = CreateMaterial( "aura_mat", "UnlitGeneric", params )
 function EFFECT:Init( data )
 	
 	self.Position = data:GetOrigin()
@@ -34,7 +22,7 @@ function EFFECT:Init( data )
 	
 		for i=1,math.random(7,11) do
 		
-			local particle = emitter:Add( "sprites/aura.vmt", Pos + Vector(0,0,math.random(0,60)))
+			local particle = emitter:Add( "sprites/aura", Pos + Vector(0,0,math.random(0,60)))
 			local sz = math.random(8, 11)
 
 			particle:SetVelocity(Vector(math.random(-sidevel,sidevel),math.random(-sidevel,sidevel), math.random(-up_downvel, up_downvel)))
@@ -52,7 +40,7 @@ end
 
 
 function EFFECT:Think( )
-	return self.LiveTime > CurTime()	
+	return IsValid( self ) and CurTime() < self.LiveTime or false
 end
 
 -- Draw the effect
@@ -60,9 +48,6 @@ function EFFECT:Render()
 	return true-- Do nothing - this effect is only used to spawn the particles in Init	
 end
 
-function EFFECT:Draw()
-	return true
-end
 
 
 

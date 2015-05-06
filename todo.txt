@@ -1,15 +1,22 @@
-The Hidden "To Do" List.
+To Fix:
+-Players spawning where they are as spectator?
+-Changing captain model (as far as I know) to a custom model crashes the game.
+-Scoreboard doesn't display long names properly
+-Occasional script error when opening scoreboard (invalid player object?)
+-Hidden seems to be able to be picked again when selecting a new one.
 
-1. End round event. DONE
-2. Clock kills, deaths, score, etc. -- DONE
-3. Handle spectators (able to spectate players, etc ) DONE
-4. Spectator hud. DONE
-5. Add the Hiddens stats to the scoreboard. -- DONE
-6. Add Hidden selection options (e.g.  By most damage, by killer, random, etc ) -- DONE
-7. Fix GUI to work with lower resolutions. -- DONE
-8. Add animation translations for Hidden model. -- DONE
-9. Add some more guns. -- DONE
-10. Add some more equipment.
-11. Add captains. -- DONE
-12. Add sounds to UI.
-13. Add Ammo to the HUD -- DONE
+ [ERROR] gamemodes/thehidden/entities/weapons/weapon_hdn_stimpack/shared.lua:73: attempt to call method 'Heal' (a nil value)
+  1. Heal - gamemodes/thehidden/entities/weapons/weapon_hdn_stimpack/shared.lua:73
+   2. unknown - gamemodes/thehidden/entities/weapons/weapon_hdn_stimpack/shared.lua:65
+Fortune: ah
+Fortune: ok
+Açylus: [ERROR] gamemodes/thehidden/entities/weapons/weapon_fort_base/shared.lua:417: attempt to index local 'mpos' (a nil value)
+  1. ShootEffects - gamemodes/thehidden/entities/weapons/weapon_fort_base/shared.lua:417
+   2. ShootBullet - gamemodes/thehidden/entities/weapons/weapon_fort_base/shared.lua:446
+    3. unknown - gamemodes/thehidden/entities/weapons/weapon_fort_base/shared.lua:287
+Fortune: I know why they're not effecting gameplay
+Fortune: I can fix it dw
+Açylus: [ERROR] gamemodes/thehidden/gamemode/vgui/cl_scoreboard.lua:33: Tried to use a NULL entity!
+  1. Nick - [C]:-1
+   2. unknown - gamemodes/thehidden/gamemode/vgui/cl_scoreboard.lua:33
+    3. unknown - gamemodes/thehidden/gamemode/vgui/cl_scoreboard.lua:68

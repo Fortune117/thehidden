@@ -62,7 +62,9 @@ end
 function SWEP:SecondaryAttack()
 
 	if self:IsCharged() then
-		self:Heal( true )
+		if SERVER then
+			self:Heal( true )
+		end
 	else
 		self:EmitSound( DenySound )
 	end

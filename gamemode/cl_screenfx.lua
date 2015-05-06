@@ -176,8 +176,6 @@ function BlindThink()
 
 			BlindIntensity = BlindIntensity + add
 
-			print( add )
-
 			BlindUpdate = CurTime() + delay
 		end
 		if CurTime() >= BlindFade then
@@ -196,7 +194,7 @@ function GM:HiddenVisionThink()
 					local effect = EffectData()
 					effect:SetOrigin( v:GetPos() )
 					effect:SetEntity( v )
-					util.Effect( "HDN_Vision", effect )
+					util.Effect( "hdn_vision", effect )
 				end
 			end
 		else
@@ -205,10 +203,44 @@ function GM:HiddenVisionThink()
 					local effect = EffectData()
 					effect:SetOrigin( v:GetPos() )
 					effect:SetEntity( v )
-					util.Effect( "HDN_Vision", effect )
+					util.Effect( "hdn_vision", effect )
 				end
 			end
 		end
 		VisionSmokeDelay = CurTime() + 0.05
+	end
+end
+
+
+function GM:PostPlayerDraw( )
+	if not LocalPlayer():IsHidden() then
+		for k,ply in pairs( team.GetPlayers( TEAM_HUMAN ) ) do
+			if IsValid( ply ) and ply:Alive() and ply != LocalPlayer() then
+
+				local head = ply:LookupBone("ValveBiped.Bip01_Head1")
+				local headpos,headang = ply:GetBonePosition(head)
+
+				local offset = Vector( 0, 0, 15 )
+				local ang = LocalPlayer():EyeAngles()
+				local pos = headpos + offset + ang:Up() - ang:Right()*6
+			 
+				ang:RotateAroundAxis( ang:Forward(), 90 )
+				ang:RotateAroundAxis( ang:Right(), 90 )
+
+				local campos = pos:ToScreen()
+				cam.Start3D2D( pos, Angle( 0, ang.y, 90 ), 0.05 )
+
+					local font = "HiddenHUDL"
+					surface.SetFont( font )
+					local name = ply:Nick() or "undefined"
+					local w,h = surface.GetTextSize( name ) 
+					surface.SetDrawColor( Color( 0, 0, 0, 30 ) )
+					surface.DrawRect( 0, 0, w*1.4, h*1.1 )
+					draw.GlowingText(name, font, w*0.2, h*0.05, unpack( white_glow ) )
+
+				cam.End3D2D()
+
+			end
+		end
 	end
 end

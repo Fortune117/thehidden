@@ -173,6 +173,7 @@ function GM:PlayerSay( ply, text )
 			RTV.Commands[ cmd ]( ply )
 		end
 	end
+	return text 
 end
 
 local PLY = FindMetaTable( "Player" )

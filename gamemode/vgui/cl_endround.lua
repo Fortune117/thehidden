@@ -27,7 +27,7 @@ function EndRoundEvent( )
 	local winner = net.ReadInt( 8 )
 	local team_name = net.ReadString() 
 
-	local end_screen_h = GAMEMODE.Hidden.SelectMode == 4 and winner == TEAM_HUMAN and 300 or 150
+	local end_screen_h = winner == TEAM_HUMAN and 300 or 150
 	end_screen = vgui.Create( "DFrame" ) 
 	end_screen:SetSize( endscreen_w, end_screen_h )
 	end_screen:SetTitle( "" )
@@ -73,11 +73,11 @@ function EndRoundEvent( )
 		surface.SetDrawColor( Color( 255, 255, 255, 255 ) )
 		surface.DrawRect( x - bar_blur - xsz/4, y + ysz + bar_blur*2, xsz + bar_blur*2 + (xsz/4)*2, bar_h )
 
-		if GAMEMODE.Hidden.SelectMode == 4 and winner == TEAM_HUMAN then 
+		if winner == TEAM_HUMAN then 
 			x = 5
 			y =  end_screen_h - (y + ysz + bar_blur*2)
 			local ply = GetHiddenKiller()
-			local name = ply and ply:Nick() or "Unknown"
+			local name = ply and ply:Nick() or "No one"
 			local text = name.." is credited with the kill!"
 				  font = ScrW() < 1500 and "HiddenHUDML" or "HiddenHUD" 
 			surface.SetFont( font )

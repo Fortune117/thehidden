@@ -41,33 +41,6 @@ local Presets =
 	[ "The Demon" ] = { "With a slightly agility focused build, The Demon is fast but still packs a punch. Recommended for beginners.", {8, 14, 8 } },
 	[ "The Rogue" ] = { "Fast and with high endurance, The Rouge has low strength but is very hard to catch. Not recommended for beginners.", {4, 13, 13 } }
 } 
- 
-function CutUpString( str, width, font )
-	local str_pieces = {}
-	surface.SetFont( font )
-	local xsz,ysz = surface.GetTextSize( str )
-	if xsz < width then
-		return { str }
-	end
-	local str_table = string.Explode( " ", str )
-	local cur_string = ""
-	for i = 1,#str_table do
-		surface.SetFont( font )
-		local text = i > 1 and cur_string.." "..str_table[ i ] or str_table[ i ]
-		local xsz,ysz = surface.GetTextSize( text )
-		if xsz >= width then
-			str_pieces[ #str_pieces+1 ] = cur_string
-			cur_string = str_table[ i ]
-		else
-			cur_string = text
-		end
-		if i == #str_table then
-			str_pieces[ #str_pieces+1 ] = cur_string
-		end
-	end
-	return str_pieces
-end
-
 
 local h_menu
 function OpenHiddenMenu()

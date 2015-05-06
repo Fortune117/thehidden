@@ -99,10 +99,19 @@ function GM:ApplyDamageFactors( ply, dmginfo )
 	if atk:IsPlayer() then
 
 		if ply:IsHidden() then
-			dmginfo:ScaleDamage( 1 - self.Hidden.DamageReduction )
+			local scale = 1 - self.Hidden.DamageReduction
+			if self.Hidden.DamageReductionScaleWithPlayers then
+				local reduction = scale - ( #player.GetAll()*self.Hidden.DamageReductionScaleRatio )
+				scale = math.Clamp( reduction, ( 1 - self.Hidden.DamageReductionScaleMax ), 1 )
+			end
+			dmginfo:ScaleDamage( scale )
 		elseif atk:IsHidden() then
 			if not dmginfo:IsExplosionDamage() then 
-				dmginfo:ScaleDamage( 1 + self.Hidden.DamageMult )
+				local scale =  1 + self.Hidden.DamageMult 
+				if self.Hidden.DamageScaleWithPlayers then
+					scale = math.min( scale + self.Hidden.DamageScaleRatio*#player.GetAll(), 1 + self.Hidden.DamageScaleMax )
+				end
+				dmginfo:ScaleDamage( scale )
 			end
 		end
 
@@ -253,6 +262,10 @@ function GM:ShowTeam( ply )
 	ply:ConCommand( "hdn_loadout" )
 end
 
+function GM:ShowHelp( ply )
+	--ply:ConCommand( "hdn_helpmenu" )
+end
+
 function GM:OnPlayerHealed( ply, amount )
 	net.Start( "HealNumbers" )
 		net.WriteInt( amount, 16 )
@@ -265,6 +278,9 @@ function GM:PlayerDeathThink()
 
 end
 
+function GM:PlayerNoClip( ply )
+	return not game.IsDedicated() or false 
+end
 
 local hidden_select_funcs = 
 {
@@ -287,6 +303,11 @@ local hidden_select_funcs =
 			elseif hidden_damage == damage then
 				table.insert( ply_table, ply )
 			end
+		end
+		if #ply_table <= 0 then
+			ply_table = team.GetPlayers( TEAM_HUMAN )
+			local specs = team.GetPlayers( TEAM_SPECTATOR )
+			table.Merge( ply_table, specs )
 		end
 		return table.Random( ply_table )
 	end,
@@ -543,6 +564,13 @@ function GM:KeyPress( ply, key )
 
 end 
 
+function GM:AllowPlayerPickup( ply, entity )
+	if ply:Alive() and ply:IsHidden() then
+		return true 
+	end
+	return false 
+end
+
 GM.ThinkTime = 1
 GM.ThinkDelay = 1
 function GM:Think()
@@ -566,6 +594,7 @@ concommand.Add( "hdn_debug_invis", function( ply )
 	if ply:IsAdmin() then
 		local hdn = GetHidden()
 		hdn:SetMaterial( "" )
+		hdn:SetColor( Color( 255, 255, 255, 255 ) )
 	end
 end)
 

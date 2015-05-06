@@ -30,7 +30,12 @@ local y = 2
 local scores =
 { 
 	{"Name", function( ply )
-		return string.sub( ply:Nick(), 0, math.min( string.len( ply:Nick() ), 20 ) )
+		local name = ply:Nick()
+		local max = 15
+		if string.len( name ) > max then
+			name = string.sub( ply:Nick(), 0, math.min( string.len( ply:Nick() ), 15 ) )..".."
+		end
+		return name
 	end},
 	{"Score", function( ply )
 		return ply:GetNWInt( "Score", 0 )
@@ -50,7 +55,7 @@ local blur = 2
 local blur_diff = 2
 function CreatePlayer( ply, ply_team, is_alive )
 	local ply_pnl = vgui.Create( "DPanel", players_panel )
-	ply_pnl:SetSize( players_col:GetWide(), players_panel:GetTall()/8 )
+	ply_pnl:SetSize( players_col:GetWide(), players_panel:GetTall()/10 )
 	ply_pnl:Dock( TOP )
 	local gap = (ply_pnl:GetWide()/#scores)
 	function ply_pnl:Paint( w, h )
@@ -63,11 +68,19 @@ function CreatePlayer( ply, ply_team, is_alive )
 			draw.BlurredBar(  blur+blur_diff, blur+blur_diff, w - (blur+blur_diff)*2, h - (blur+blur_diff)*2 , 0, Color( 0, 0, 0, 255) )
 		end 
 
+		local font = ScrW() < 1300 and "HiddenHUDMS" or "HiddenHUDScoreL"
 		for i = 1,#scores do
-			surface.SetFont( "HiddenHUDScoreL" )
-			local xsz, ysz = surface.GetTextSize( scores[ i ][ 2 ]( ply ) )
-			draw.AAText( scores[ i ][ 2 ]( ply ), "HiddenHUDScoreL", gap*i - gap/2 - xsz/2, self:GetTall()/2 - ysz/2, Color( 235, 235, 235, 255), TEXT_ALIGN_LEFT )
-			_ysz = ysz
+			if i == 1 then
+				surface.SetFont( font )
+				local xsz, ysz = surface.GetTextSize( scores[ i ][ 2 ]( ply ) )
+				draw.AAText( scores[ i ][ 2 ]( ply ), font, 12, self:GetTall()/2 - ysz/2, Color( 235, 235, 235, 255), TEXT_ALIGN_LEFT )
+				_ysz = ysz
+			else
+				surface.SetFont( font )
+				local xsz, ysz = surface.GetTextSize( scores[ i ][ 2 ]( ply ) )
+				draw.AAText( scores[ i ][ 2 ]( ply ), font, gap*i - gap/2 - xsz/2, self:GetTall()/2 - ysz/2, Color( 235, 235, 235, 255), TEXT_ALIGN_LEFT )
+				_ysz = ysz
+			end
 		end
 	end
 	return ply_pnl
@@ -187,10 +200,17 @@ function CreateScoreboard()
 		local _ysz 
 		local gap = (w/#scores)
 		for i = 1,#scores do
-			surface.SetFont( "HiddenHUDSS" )
-			local xsz, ysz = surface.GetTextSize( scores[ i ][ 1 ] )
-			draw.GlowingText( scores[ i ][ 1 ], "HiddenHUDSS", gap*i - gap/2 - xsz/2, bar_y + 8, unpack( white_glow ) )
-			_ysz = ysz
+			if i == 1 then
+				surface.SetFont( "HiddenHUDSS" )
+				local xsz, ysz = surface.GetTextSize( scores[ i ][ 1 ] )
+				draw.GlowingText( scores[ i ][ 1 ], "HiddenHUDSS", gap*i - gap/2 - xsz, bar_y + 8, unpack( white_glow ) )
+				_ysz = ysz
+			else
+				surface.SetFont( "HiddenHUDSS" )
+				local xsz, ysz = surface.GetTextSize( scores[ i ][ 1 ] )
+				draw.GlowingText( scores[ i ][ 1 ], "HiddenHUDSS", gap*i - gap/2 - xsz/2, bar_y + 8, unpack( white_glow ) )
+				_ysz = ysz
+			end
 		end
 
 	end

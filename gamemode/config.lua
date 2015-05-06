@@ -9,9 +9,9 @@
 //Round/Time settings.
 GM.RoundTime = 300 //Default: 300.
 GM.RoundLimit = 10  //How many rounds before a map change. Default: 10.
-GM.RoundEndTime = 10 //Default: 10 
-GM.RoundPrepTimeCustom = 20 --Prep time if custom mode is enabled. This is high so the Hidden has time to select his stats. Default: 20.
-GM.RoundPrepTime = 10 --The round prep time if custom mode is disabled. Default: 10.
+GM.RoundEndTime = 15 //Default: 15. 
+GM.RoundPrepTimeCustom = 25 --Prep time if custom mode is enabled. This is high so the Hidden has time to select his stats. Default: 25.
+GM.RoundPrepTime = 15 --The round prep time if custom mode is disabled. Default: 15.
 
 GM.SlowAmount = 0 //What the host timeframe is set to when the round ends. Set to 0 to disable. Default: 0.
 
@@ -31,7 +31,7 @@ GM.Hidden.Stamina = 100 // Max stamina. Default: 100.
 GM.Hidden.RegenTime = 7 //Time it takes for stamina to reach max. Default: 10.
 GM.Hidden.JumpPower = 250 // Power of the Hiddens jump. Default: 300.
 GM.Hidden.Armor = 0 //Armor that the Hidden starts with. Default: 0.
-GM.Hidden.Alpha = 255 // Alpha channel for the Hiddens colour. Default: 255.
+GM.Hidden.Alpha = 8 // Alpha channel for the Hiddens colour. Default: 8.
 GM.Hidden.PounceDelay = 0.2 // Delay between pounces in seconds. Default: 0.2.
 GM.Hidden.PounceCost = 25 // How much stamina it takes to pounce. Default: 25.
 GM.Hidden.StaminaDelay = 0.8 // Delay before stamina starts to recharge (after using an ability, e.g. pouncing) in seconds. Default: 0.8.
@@ -40,9 +40,21 @@ GM.Hidden.HangDrainSpeed = 2 // Speed at which stamina is drained/sec. Default: 
 GM.Hidden.MaxBodyHeal = 4 // Max amount of times the Hidden can heal from a body. Default: 4.
 GM.Hidden.BodyHealAmount = 8 // How much health the Hidden gets for hitting a body. Default: 8.
 GM.Hidden.DamageReduction = 0 //What percentage of damage is reduced. Default: 0.
-GM.Hidden.DamageMult = 0.33 //How much extra damage the hidden does (% based). Default: 0.
+GM.Hidden.DamageMult = 0.33 //How much extra damage the hidden does (% based). Default: 0.33.
 GM.Hidden.AttackDelay = 0.6 //Default delay between attacks. Default: 0.6.
 GM.Hidden.Model = "models/player/hidden.mdl"
+GM.Hidden.Material = "" //The material of the Hidden. The default material is usually "sprites/heatwave", but I'm testing alpha for now.
+
+//Damage reduction options.
+//These are here to balance things out when there are lots of players.
+GM.Hidden.DamageReductionScaleWithPlayers = true //Determines whether or not damage dealt to the hidden should scale with playercount. Default: true.
+GM.Hidden.DamageReductionScaleMax = 0.7 //The maximum damage reduction. 0 = 0%, 1 = 100%. Default: 0.7.
+GM.Hidden.DamageReductionScaleMin = 0 //Minimum damge reduction. Default: 0.
+GM.Hidden.DamageReductionScaleRatio = 0.02 //How much less damage the hidden takes per player. Default: 0.02.
+
+GM.Hidden.DamageScaleWithPlayers = true //Determines wether or not the Hiddens damage should scale with players.
+GM.Hidden.DamageScaleMax =  0.35 //The max percentage of extra damage that the Hidden deals. Default: 0.35.
+GM.Hidden.DamageScaleRatio =  0.015 //How much % extra damage the hidden gets per player. Default: 0.015.
 
 //Pig Stick Mode
 //1 = Normal pig stick. (High damage attack, with a delay and a sound.)
@@ -170,4 +182,14 @@ GM.TranqBlindDuration = 12 //How long a tranq dart affects the hiddens vision. D
 GM.TranqBlindIntensity = 0.96 //How intense the blind effect is. Default: 0.96. Note: Don't put this above 0.98, it'll do some odd stuff.
 
 
+GM.InfoText = [[
 
+Welcome to The Hidden.
+
+In this gamemode there is one player who is invisible, it is their job to try and eliminate every human.
+
+The humans job is to try and defeat the Hidden, but be careful. He is strong, fast and hungry. 
+
+The Humans have a variety of gadgets to try and defeat the Hidden, hit F2 (by default) to bring up the load out menu. You can select your guns and equipment there.
+
+]]

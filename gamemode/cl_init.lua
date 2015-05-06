@@ -81,6 +81,36 @@ function draw.BlurredBar( x, y, w, h, b, clr )
 	surface.DrawRect( x, y, w, h )
 end
 
+ 
+function CutUpString( str, width, font )
+	local str_pieces = {}
+	surface.SetFont( font )
+	local xsz,ysz = surface.GetTextSize( str )
+	if xsz < width then
+		return { str }
+	end
+	local str_table = string.Explode( " ", str )
+	local cur_string = ""
+	for i = 1,#str_table do
+		surface.SetFont( font )
+		local text = i > 1 and cur_string.." "..str_table[ i ] or str_table[ i ]
+		local xsz,ysz = surface.GetTextSize( text )
+		if string.find( str_table[ i ], "/n", string.len( str_table[ i ] )-2, string.len( str_table[ i ] ) ) then
+			str_pieces[ #str_pieces+1 ] = cur_string
+			cur_string = str_table[ i ]
+		elseif xsz >= width then
+			str_pieces[ #str_pieces+1 ] = cur_string
+			cur_string = str_table[ i ]
+		else
+			cur_string = text
+		end
+		if i == #str_table then
+			str_pieces[ #str_pieces+1 ] = cur_string
+		end
+	end
+	return str_pieces
+end
+
 
 local PLY = FindMetaTable( "Player" )
 
