@@ -27,6 +27,8 @@ SWEP.Primary.Sound = Sound( "Weapon_UMP45.Single" )
 SWEP.Primary.DryFireSound = "Weapon_Pistol.Empty" //Empty Clip Sound
 SWEP.Primary.Force = 10 // Bullet Force
 
+SWEP.InLoadoutMenu = true
+
 SWEP.CrossHairMinDistance = 3 // Minimun distance the crosshairs can spread.
 SWEP.CrossHairDeltaDistance = 4 // The distance the crosshair rests at while standing.
 SWEP.CrossHairMaxDistance = 40 // Maximum
