@@ -23,7 +23,7 @@ function ENT:Initialize()
    	self:SetCollisionGroup(COLLISION_GROUP_PROJECTILE)
 
 	self.ThrowLiveTime = CurTime() + 3
-	self.LiveTime = CurTime() + 1.5
+	self.LiveTime = CurTime() + 1.8
 
 end
 

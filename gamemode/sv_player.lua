@@ -45,6 +45,34 @@ function PLY:AddStamina( num )
 	GAMEMODE:OnStaminaChange( self, old_stamina, new_stamina )
 end
 
+function PLY:GetPrimary()
+	local weps = self:GetWeapons()
+	for k,v in pairs( weps ) do
+		if v.InLoadoutMenu then
+			return v
+		end
+	end
+return false 
+end
+
+function PLY:CreateWeapon()
+	local wep = self:GetPrimary()
+	if not IsValid( wep ) then return end 
+	local ent = ents.Create( "hdn_droppedgun" )
+	ent:SetPos( self:GetShootPos() )
+	ent:SetAngles( self:GetAngles() )
+	ent:SetWeapon( wep )
+	ent:Spawn()
+
+	local phys = ent:GetPhysicsObject()
+	if IsValid( phys ) then
+		phys:Wake()
+		phys:ApplyForceCenter( self:GetAimVector()*math.random( 200, 350 ) + VectorRand()*15 + Vector( 0, 0, 50 ) )
+		ent:SetLocalAngularVelocity( AngleRand()*500 )
+	end
+	wep:Remove()
+end
+
 
  
 TeamSetUp =

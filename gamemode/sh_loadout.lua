@@ -114,7 +114,7 @@ LDT.Equipment2 =
 		end
 	end },
 
-	["Experimental Regenerator"] = { name = "Regen", desc = "Recover 1hp every 3-6 seconds.", hooks = "Think", funcs =  function(  )
+	["Experimental Regenerator"] = { name = "Regen", desc = "Recover 1hp every 2-4 seconds.", hooks = "Think", funcs =  function(  )
 		if CLIENT then return end
 		for k,ply in pairs( player.GetAll() ) do
 			if IsValid( ply ) then
@@ -125,7 +125,7 @@ LDT.Equipment2 =
 					if ply:Health() < ply:GetMaxHealth() then
 						if CurTime() > ply.RegenDelay then
 							ply:SetHealth( ply:Health()+1 )
-							ply.RegenDelay = CurTime() + math.random( 3, 6 )
+							ply.RegenDelay = CurTime() + math.random( 2, 4 )
 						end
 					end 
 				end
@@ -146,8 +146,16 @@ LDT.Equipment2 =
 		if ply:HasEquipment( "Laser" ) then
 			return 0.7
 		end
-	end  } }
-}
+	end  } },
+
+	["Ammo Bags"] = { name = "ABox", desc = "Player starts with two extra ammo packs. Left click to throw the pack on the ground. E to pick up.", hooks = "OnLoadoutGiven", funcs =  function( ply )
+		if IsValid( ply ) then
+			if ply:HasEquipment( "ABox" ) then
+				ply:Give( "weapon_hdn_ammobox" )
+			end
+		end 
+	end }
+} 
  
 for k,v in pairs( LDT.Equipment ) do 
 	if istable( v.hooks ) then 

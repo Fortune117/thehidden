@@ -8,6 +8,15 @@ function GM:SetRoundTime( time )
 	SetGlobalInt( "RoundTime", math.Round( CurTime() + time ) )
 end
 
+function GM:QueComplete()
+	for k,v in pairs( player.GetAll() ) do
+		if not table.HasValue( self.HiddenPlayers, v:SteamID64() ) then
+			return false 
+		end
+	end
+	return true 
+end
+
 RoundChangeFunctions =
 {
 	[ROUND_WAITING] = function()
@@ -86,8 +95,14 @@ RoundChangeFunctions =
 		SetGlobalBool( "InRound", false )
 		GAMEMODE.RoundLimit = GAMEMODE.RoundLimit - 1
 		if GAMEMODE.RoundLimit <= 0 then
-			RTV.Start()
-			GAMEMODE:SetRoundTime( 35 )
+			if GM.Hidden.ChangeMapWhenQueComplete then
+				if GAMEMODE:QueComplete() then
+					
+				end
+			else
+				RTV.Start()
+				GAMEMODE:SetRoundTime( 35 )
+			end
 		else
 			GAMEMODE:SetRoundTime( GAMEMODE.RoundEndTime )
 		end

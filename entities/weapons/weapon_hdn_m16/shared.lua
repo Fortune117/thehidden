@@ -21,8 +21,8 @@ SWEP.Primary.Damage 	= 20 // Damage
 SWEP.Primary.Delay 		= 0.12 //Delay between shots.
 SWEP.Primary.Cone 		= 0.0075 // Cone
 SWEP.Primary.ClipSize    = 30
-SWEP.Primary.ClipMax     = 90
-SWEP.Primary.DefaultClip = 90
+SWEP.Primary.ClipMax     = 60
+SWEP.Primary.DefaultClip = 60
 SWEP.Primary.Automatic = true // Automatic?
 SWEP.Primary.Tracer = false // Should we have a tracer?
 SWEP.Primary.Sound = Sound( "Weapon_M4A1.Single" )
@@ -31,6 +31,7 @@ SWEP.Primary.DryFireSound = "Weapon_Pistol.Empty" //Empty Clip Sound
 SWEP.Primary.Force = 10 // Bullet Force
 
 SWEP.InLoadoutMenu = true
+SWEP.CalculateStats = true 
 
 SWEP.CrossHairMinDistance = 3 // Minimun distance the crosshairs can spread.
 SWEP.CrossHairDeltaDistance = 4 // The distance the crosshair rests at while standing.

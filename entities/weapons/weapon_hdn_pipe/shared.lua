@@ -107,8 +107,8 @@ function SWEP:CreateGrenade( ply, angle, src, vel )
    gren:SetOwner(ply)
 
    --gren:SetGravity(0.4)
-     gren:SetFriction(8)
-     gren:SetElasticity(2)
+     gren:SetFriction(7)
+     gren:SetElasticity(3)
 
    gren:Spawn()
 
@@ -136,7 +136,7 @@ function SWEP:ThrowGrenade()
 	 ang.p = -10 + ang.p * -((90 + 10) / 90)
 	end
 
-	local vel = 1000
+	local vel = 1400
 
 	local vfw = ang:Forward()
 	local vrt = ang:Right()

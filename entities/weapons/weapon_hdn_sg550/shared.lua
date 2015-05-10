@@ -17,8 +17,8 @@ SWEP.Base				= "weapon_fort_base"
 
 SWEP.Primary.Ammo       = "357" -- Type of ammo
 SWEP.Primary.Recoil 	= 3
-SWEP.Primary.Damage 	= 38 // Damage
-SWEP.Primary.Delay 		= 0.6 //Delay between shots.
+SWEP.Primary.Damage 	= 45 // Damage
+SWEP.Primary.Delay 		= 0.4 //Delay between shots.
 SWEP.Primary.Cone 		= 0.008 // Cone
 SWEP.Primary.ClipSize = 20
 SWEP.Primary.Automatic = true
@@ -28,9 +28,10 @@ SWEP.Primary.Automatic = true // Automatic?
 SWEP.Primary.Tracer = false // Should we have a tracer?
 SWEP.Primary.Sound = Sound( "Weapon_SG550.Single" )
 SWEP.Primary.DryFireSound = "Weapon_Pistol.Empty" //Empty Clip Sound
-SWEP.Primary.Force = 150 // Bullet Force
+SWEP.Primary.Force = 50 // Bullet Force
 
 SWEP.InLoadoutMenu = true
+SWEP.CalculateStats = true 
 
 SWEP.CrossHairMinDistance = 2 // Minimun distance the crosshairs can spread.
 SWEP.CrossHairDeltaDistance = 3 // The distance the crosshair rests at while standing.

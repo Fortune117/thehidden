@@ -28,7 +28,6 @@ SWEP.Primary.DryFireSound = "Weapon_Pistol.Empty" //Empty Clip Sound
 SWEP.Primary.Force = 10 // Bullet Force
 
 
-
 SWEP.UseHands			= true
 SWEP.ViewModelFlip		= false
 SWEP.ViewModelFOV		= 54

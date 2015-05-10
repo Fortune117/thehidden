@@ -16,11 +16,11 @@ SWEP.Base				= "weapon_fort_base"
 
 SWEP.Kind = WEAPON_HEAVY
 
-SWEP.Primary.Ammo       = "Buckshot" -- Type of ammo
+SWEP.Primary.Ammo       = "Gravity" -- Type of ammo
 SWEP.Primary.Recoil 	= 2
-SWEP.Primary.Damage 	= 9 // Damage
+SWEP.Primary.Damage 	= 8 // Damage
 SWEP.Primary.Delay 		= 1.2 //Delay between shots.
-SWEP.Primary.Cone 		= 0.04 // Cone
+SWEP.Primary.Cone 		= 0.06 // Cone
 SWEP.Primary.ClipSize 	= 8
 SWEP.Primary.DefaultClip = 24
 SWEP.Primary.ClipMax 	= 24
@@ -29,9 +29,10 @@ SWEP.Primary.Automatic 	= true // Automatic?
 SWEP.Primary.Tracer 	= false // Should we have a tracer?
 SWEP.Primary.Sound		= Sound( "Weapon_M3.Single" )
 SWEP.Primary.DryFireSound = "Weapon_Pistol.Empty" //Empty Clip Sound
-SWEP.Primary.Force = 10 // Bullet Force
+SWEP.Primary.Force = 2 // Bullet Force
 
 SWEP.InLoadoutMenu = true
+SWEP.CalculateStats = true 
 
 SWEP.CrossHairMinDistance = 15 // Minimun distance the crosshairs can spread.
 SWEP.CrossHairDeltaDistance = 15 // The distance the crosshair rests at while standing.

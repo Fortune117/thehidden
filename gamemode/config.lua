@@ -11,7 +11,7 @@ GM.RoundTime = 300 //Default: 300.
 GM.RoundLimit = 10  //How many rounds before a map change. Default: 10.
 GM.RoundEndTime = 15 //Default: 15. 
 GM.RoundPrepTimeCustom = 25 --Prep time if custom mode is enabled. This is high so the Hidden has time to select his stats. Default: 25.
-GM.RoundPrepTime = 15 --The round prep time if custom mode is disabled. Default: 15.
+GM.RoundPrepTime = 1 --The round prep time if custom mode is disabled. Default: 15.
 
 GM.SlowAmount = 0 //What the host timeframe is set to when the round ends. Set to 0 to disable. Default: 0.
 
@@ -36,9 +36,9 @@ GM.Hidden.PounceDelay = 0.2 // Delay between pounces in seconds. Default: 0.2.
 GM.Hidden.PounceCost = 25 // How much stamina it takes to pounce. Default: 25.
 GM.Hidden.StaminaDelay = 0.8 // Delay before stamina starts to recharge (after using an ability, e.g. pouncing) in seconds. Default: 0.8.
 GM.Hidden.HangDrain = true // Should hanging onto walls drain stamina? Default: true.
-GM.Hidden.HangDrainSpeed = 2 // Speed at which stamina is drained/sec. Default: 2.
+GM.Hidden.HangDrainSpeed = 1 // Speed at which stamina is drained/sec. Default: 1.
 GM.Hidden.MaxBodyHeal = 4 // Max amount of times the Hidden can heal from a body. Default: 4.
-GM.Hidden.BodyHealAmount = 8 // How much health the Hidden gets for hitting a body. Default: 8.
+GM.Hidden.BodyHealAmount = 12 // How much health the Hidden gets for hitting a body. Default: 8.
 GM.Hidden.DamageReduction = 0 //What percentage of damage is reduced. Default: 0.
 GM.Hidden.DamageMult = 0.33 //How much extra damage the hidden does (% based). Default: 0.33.
 GM.Hidden.AttackDelay = 0.6 //Default delay between attacks. Default: 0.6.
@@ -48,9 +48,9 @@ GM.Hidden.Material = "" //The material of the Hidden. The default material is us
 //Damage reduction options.
 //These are here to balance things out when there are lots of players.
 GM.Hidden.DamageReductionScaleWithPlayers = true //Determines whether or not damage dealt to the hidden should scale with playercount. Default: true.
-GM.Hidden.DamageReductionScaleMax = 0.7 //The maximum damage reduction. 0 = 0%, 1 = 100%. Default: 0.7.
+GM.Hidden.DamageReductionScaleMax = 0.75 //The maximum damage reduction. 0 = 0%, 1 = 100%. Default: 0.75.
 GM.Hidden.DamageReductionScaleMin = 0 //Minimum damge reduction. Default: 0.
-GM.Hidden.DamageReductionScaleRatio = 0.02 //How much less damage the hidden takes per player. Default: 0.02.
+GM.Hidden.DamageReductionScaleRatio = 0.03 //How much less damage the hidden takes per player. Default: 0.03.
 
 GM.Hidden.DamageScaleWithPlayers = true //Determines wether or not the Hiddens damage should scale with players.
 GM.Hidden.DamageScaleMax =  0.35 //The max percentage of extra damage that the Hidden deals. Default: 0.35.
@@ -80,9 +80,11 @@ GM.Hidden.VisionDrain = 2 //Stamina Drained every half second while using Hidden
 // 2 = The player who did the most damage to the Hidden.
 // 3 = A player is chosen out of all those who did damage to the Hidden during the previous round. The chance of being selected is relative to damage dealt.
 // 4 = The player who killed the Hidden.
-GM.Hidden.SelectMode = 3 //Default: 3. 
+// 5 = Que system. All players are systematically gone through so everyone gets a turn.
+GM.Hidden.SelectMode = 5 //Default: 3. 
 GM.Hidden.LimitRounds = true // If enabled, the Hidden can only remain the Hidden for a limited number of rounds. Default: true.
 GM.Hidden.MaxRounds = 3 //Determines how many rounds in a row somone can remain the Hidden. Default: 3.
+GM.Hidden.ChangeMapWhenQueComplete = true //Determines if the map should change only if everyone has had a turn as the Hidden (while in Select mode 5). Default: true.
 
 
 --Take care editing these. It can, and will, unbalance the game if you don't edit them reasonably.
@@ -125,7 +127,7 @@ GM.Hidden.GrenadeRatio = 3 //Default: 3.
 GM.Hidden.MinimumGrenades = 0 //What the minimum amount of grenades for the Hidden is. Default: 0.
 GM.Hidden.MaximumGrenades = 5 //Maximum number of grenades for the Hidden. Default: 5.
 GM.Hidden.GrenadeDamage = 70 //Grenades maximun damage.
-GM.Hidden.GrenadeBlastRadius = 300 //Radius of the grenades explosion.
+GM.Hidden.GrenadeBlastRadius = 450 //Radius of the grenades explosion.
 GM.Hidden.GrenadeCanDamageSelf = true //Can the Hidden damage himself with grenades? Default: true.
 GM.Hidden.GrenadeBlurVision = true //Should the grenade blur the vision of the people it hits? Default: true.
 GM.Hidden.GrenadeBlindDuration = 8 //Duration of the blind. Default: 8.
@@ -155,8 +157,8 @@ GM.Jericho.AllowCrosshair = false //Determines wether or not humans have a cross
 // Captains are randomly selected each round. They have increased, hp, speed, armor, stamina, etc.
 GM.Captain = {}
 GM.Captain.Enabled = true // Determines whether or not captains are enabled. Default: true.   
-GM.Captain.Health = 125 // Captains max hp. Default: 125.
-GM.Captain.Speed = 290 // Captains move speed. Default: 290.
+GM.Captain.Health = 130 // Captains max hp. Default: 130.
+GM.Captain.Speed = 300 // Captains move speed. Default: 300.
 GM.Captain.Stamina = 125 // Captains max stamina. Default:: 125.
 GM.Captain.JumpPower = 200 // Power of the Captains jump. Default: 200.
 GM.Captain.Armor = 0 // Captains starting armor. Default: 30.

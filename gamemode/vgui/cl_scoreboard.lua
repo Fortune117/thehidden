@@ -33,7 +33,7 @@ local scores =
 		local name = ply:Nick() or "undefined"
 		local max = 15
 		if string.len( name ) > max then
-			name = string.sub( ply:Nick(), 0, math.min( string.len( ply:Nick() ), 15 ) )..".."
+			name = string.sub( ply:Nick() or "undefined", 0, math.min( string.len( ply:Nick() ), 15 ) )..".."
 		end
 		return name
 	end},

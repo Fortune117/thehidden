@@ -14,7 +14,7 @@ end
 SWEP.Base				= "weapon_base"
 
 SWEP.Primary.Ammo       = "none"   -- Type of ammo
-SWEP.Primary.Damage 	= 33 // Damage
+SWEP.Primary.Damage 	= 36 // Damage
 SWEP.Primary.Automatic	= true
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.ClipMax 	= -1
@@ -205,7 +205,19 @@ function SWEP:Slash()
 						if not ent.IsGib then
 							if self.Owner:Health() < GAMEMODE.Hidden.Health then
 								ent.Hits = ent.Hits+1
-								self.Owner:SetHealth( math.min( self.Owner:Health()+GAMEMODE.Hidden.BodyHealAmount, GAMEMODE.Hidden.Health ) )
+								self.Owner:SetHealth( math.min( self.Owner:Health()+GAMEMODE.Hidden.BodyHealAmount, self.Owner:GetMaxHealth() ) )
+								if ent.Hits >= GAMEMODE.Hidden.MaxBodyHeal then
+									local dmg = DamageInfo()
+									dmg:SetDamage( self.Primary.Damage )
+									dmg:SetInflictor( self.Weapon )
+									dmg:SetAttacker( self.Owner )
+									dmg:SetDamageType( DMG_SLASH )
+									dmg:SetDamageForce( self.Owner:GetAimVector()*self.Primary.HitForce )
+									dmg:SetDamagePosition( linetr.HitPos )
+									ent.PigSticked = true
+									ent.DirForce = (self.Owner:GetShootPos() - (ent:GetPos()+Vector(0,0,60) )):GetNormal()*-1
+									ent:TakeDamageInfo( dmg )
+								end
 							end
 						end
 					end

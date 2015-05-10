@@ -42,6 +42,7 @@ util.AddNetworkString( "TimeSlowSound" )
 GM.ShouldChangeHidden = false
 GM.InitialHidden = false
 GM.HiddenRounds = 0
+GM.HiddenPlayers = {}
 
 function GM:PlayerInitialSpawn( ply )
 
@@ -82,7 +83,7 @@ function GM:GetFallDamage( ply, speed )
  	
  	if ply:IsHidden() then return 0 end
 
-	return ( speed / 8 )
+	return ( speed / 11 )
  
 end
 
@@ -254,6 +255,10 @@ end
 
 function GM:DoPlayerDeath( ply, atk, dmginfo )
 
+	if ply:Team() == TEAM_HUMAN then
+		ply:CreateWeapon()
+	end
+
 	ply:CreateDeathRagdoll( ply, atk, dmginfo )
 	return	
 
@@ -332,11 +337,17 @@ local hidden_select_funcs =
 				break
 			end
 		end
-
-		if #ply_table < 1 then
-			ply_table = player.GetAll()
+		local safety_table = {}
+		for k,v in pairs( ply_table ) do
+			if IsValid( v ) then
+				safety_table[ k ] = v
+			end
 		end
-		return table.Random( ply_table )
+
+		if #safety_table < 1 then
+			safety_table = player.GetAll()
+		end
+		return table.Random( safety_table )
 	end,
 
 	[ 4 ] = function()
@@ -350,12 +361,32 @@ local hidden_select_funcs =
 		return table.Random( ply_table )
 	end,
 
+	[ 5 ] = function()
+		local plys = player.GetAll()
+		local selected_ply = nil
+		for k, ply in pairs( plys ) do
+			local steam = ply:SteamID64()
+			if not table.HasValue( GAMEMODE.HiddenPlayers, steam ) then
+				GAMEMODE.HiddenPlayers[ #GAMEMODE.HiddenPlayers + 1 ] = steam
+				selected_ply = ply
+				break
+			end
+		end
+		if not selected_ply then
+			GAMEMODE.HiddenPlayers = {}
+			selected_ply = table.Random( player.GetAll() )
+			GAMEMODE.HiddenPlayers[ #GAMEMODE.HiddenPlayers + 1 ] = selected_ply:SteamID64()
+		end
+		return selected_ply 
+	end,
+
 	[ "debug" ] = function()
 		return Entity( 1 )
 	end 
 
 }
  
+
 function GM:SelectNewHidden() 
 	hidden_select_funcs[ self.Hidden.SelectMode ]():SetTeam( TEAM_HIDDEN )
 	self.ShouldChangeHidden = false

@@ -42,7 +42,6 @@ SWEP.Secondary.DefaultClip		= -1
 SWEP.Secondary.Automatic  	 	= false
 SWEP.Secondary.Ammo         	= "none"
 
-
 SWEP.TriggerPlaced = false
 
 SWEP.DrawAnim = ACT_SLAM_TRIPMINE_DRAW

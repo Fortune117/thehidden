@@ -21,8 +21,8 @@ SWEP.Primary.Delay 		= 0.14 //Delay between shots.
 SWEP.Primary.Cone 		= 0.007 // Cone
 SWEP.Primary.ClipSize = 25
 SWEP.Primary.Automatic = true
-SWEP.Primary.DefaultClip = 50
-SWEP.Primary.ClipMax = 50
+SWEP.Primary.DefaultClip = 75
+SWEP.Primary.ClipMax = 75
 SWEP.Primary.Tracer = false // Should we have a tracer?
 SWEP.Primary.Sound = Sound( "Weapon_AK47.Single" )
 SWEP.Primary.DryFireSound = "Weapon_Pistol.Empty" //Empty Clip Sound
@@ -30,6 +30,7 @@ SWEP.Primary.Force = 10 // Bullet Force
 
 
 SWEP.InLoadoutMenu = true
+SWEP.CalculateStats = true 
 
 SWEP.CrossHairMinDistance = 6 // Minimun distance the crosshairs can spread.
 SWEP.CrossHairDeltaDistance = 10 // The distance the crosshair rests at while standing.

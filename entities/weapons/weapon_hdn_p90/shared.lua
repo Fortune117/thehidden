@@ -22,8 +22,8 @@ SWEP.Primary.Delay 		= 0.085 //Delay between shots.
 SWEP.Primary.Cone 		= 0.02 // Cone
 SWEP.Primary.ClipSize = 50
 SWEP.Primary.Automatic = true
-SWEP.Primary.DefaultClip = 150
-SWEP.Primary.ClipMax = 150
+SWEP.Primary.DefaultClip = 100
+SWEP.Primary.ClipMax = 100
 SWEP.Primary.Automatic = true // Automatic?
 SWEP.Primary.Tracer = false // Should we have a tracer?
 SWEP.Primary.Sound = Sound( "Weapon_P90.Single" )
@@ -31,6 +31,7 @@ SWEP.Primary.DryFireSound = "Weapon_Pistol.Empty" //Empty Clip Sound
 SWEP.Primary.Force = 10 // Bullet Force
 
 SWEP.InLoadoutMenu = true
+SWEP.CalculateStats = true 
 
 SWEP.CrossHairMinDistance = 3 // Minimun distance the crosshairs can spread.
 SWEP.CrossHairDeltaDistance = 4 // The distance the crosshair rests at while standing.

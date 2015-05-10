@@ -127,13 +127,17 @@ end
  
 function GM:PreDrawHalos()
 
-	if not IsValid( self.TargetEnt ) then return end
-
 	local ply = LocalPlayer()
-	if not ply:Alive() or ply:GetObserverMode() == OBS_MODE_ROAMING then return end
-
 	local dist = math.Clamp( self.ViewDist or 0, 0, 800 )
 	local scale = 1 - ( dist / 800 ) 
+
+	if not ply:IsHidden() then
+		halo.Add( ents.FindByClass( "hdn_ammobox" ), Color( 255, 255, 255, 255 * scale ), 2 * scale, 2 * scale, 1, 1, false )
+	end
+
+	if not IsValid( self.TargetEnt ) then return end
+	if not ply:Alive() or ply:GetObserverMode() == OBS_MODE_ROAMING then return end
+
 
 	if self.TargetEnt:IsPlayer() and self.TargetEnt:Team() == TEAM_HUMAN then
 	
@@ -145,7 +149,11 @@ function GM:PreDrawHalos()
 	elseif self.TargetEnt:GetClass() == "prop_ragdoll" then
 		
 		halo.Add( {self.TargetEnt}, Color( 255, 0, 0, 255 * scale ), 2 * scale, 2 * scale, 1, 1, false )
+
+	elseif self.TargetEnt:GetClass() == "hdn_droppedgun" then
 		
+		halo.Add( {self.TargetEnt}, Color( 255, 255, 255, 255 * scale ), 2 * scale, 2 * scale, 1, 1, false )
+
 	end
 
 end
@@ -213,31 +221,33 @@ end
 
 
 function GM:PostPlayerDraw( )
-	if not LocalPlayer():IsHidden() then
+	local localply = LocalPlayer()
+	if not localply:IsHidden() then
 		for k,ply in pairs( team.GetPlayers( TEAM_HUMAN ) ) do
-			if IsValid( ply ) and ply:Alive() and ply != LocalPlayer() then
+			if IsValid( ply ) and ply:Alive() and ply != localply then
 
-				local head = ply:LookupBone("ValveBiped.Bip01_Head1")
-				if not head then return end 
-				local headpos,headang = ply:GetBonePosition(head)
+				local ply_pos = ply:GetPos()
 
-				local offset = Vector( 0, 0, 15 )
-				local ang = LocalPlayer():EyeAngles()
-				local pos = headpos + offset + ang:Up() - ang:Right()*6
+				if localply:GetPos():Distance( ply_pos ) > 500 then continue end 
+
+				local offset = Vector( 0, 0, 72 )
+				local ang = localply:EyeAngles()
+
+				local font = "HiddenHUDL"
+				surface.SetFont( font )
+				local name = ply:Nick() or "undefined"
+				local w,h = surface.GetTextSize( name ) 
+
+				local pos = ply_pos + offset + ang:Up()
 			 
 				ang:RotateAroundAxis( ang:Forward(), 90 )
 				ang:RotateAroundAxis( ang:Right(), 90 )
 
-				local campos = pos:ToScreen()
 				cam.Start3D2D( pos, Angle( 0, ang.y, 90 ), 0.05 )
 
-					local font = "HiddenHUDL"
-					surface.SetFont( font )
-					local name = ply:Nick() or "undefined"
-					local w,h = surface.GetTextSize( name ) 
 					surface.SetDrawColor( Color( 0, 0, 0, 30 ) )
-					surface.DrawRect( 0, 0, w*1.4, h*1.1 )
-					draw.GlowingText(name, font, w*0.2, h*0.05, unpack( white_glow ) )
+					surface.DrawRect( -w/2, 0, w*1.4, h*1.1 )
+					draw.AAText(name, font, w*0.2 - w/2, h*0.05, unpack( white_glow ) )
 
 				cam.End3D2D()
 

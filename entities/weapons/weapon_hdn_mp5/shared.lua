@@ -23,7 +23,7 @@ SWEP.Primary.Cone 		= 0.005 // Cone
 SWEP.Primary.ClipSize = 20
 SWEP.Primary.Automatic = true
 SWEP.Primary.DefaultClip = 60
-SWEP.Primary.ClipMax = 40
+SWEP.Primary.ClipMax = 60
 SWEP.Primary.Automatic = true // Automatic?
 SWEP.Primary.Tracer = false // Should we have a tracer?
 SWEP.Primary.Sound = Sound( "Weapon_MP5Navy.Single" )
@@ -31,6 +31,7 @@ SWEP.Primary.DryFireSound = "Weapon_Pistol.Empty" //Empty Clip Sound
 SWEP.Primary.Force = 10 // Bullet Force
 
 SWEP.InLoadoutMenu = true
+SWEP.CalculateStats = true 
 
 SWEP.CrossHairMinDistance = 3 // Minimun distance the crosshairs can spread.
 SWEP.CrossHairDeltaDistance = 4 // The distance the crosshair rests at while standing.

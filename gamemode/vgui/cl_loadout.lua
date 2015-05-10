@@ -108,7 +108,7 @@ end
 function GetTopStats()  
 	for k,v in pairs( GetValidWeapons() ) do 
 
-		if v.DontCalculateStats then continue end
+		if not v.CalculateStats then continue end
 
 		local inf = GetWeaponInfo( v.ClassName )
 		for k2,v2 in pairs( TopStats ) do 
@@ -118,12 +118,11 @@ function GetTopStats()
 	end
 end
 
-GetTopStats()
-
 
 local PANEL = {}
 
 function PANEL:Init()
+	GetTopStats()
 	surface.PlaySound( "buttons/light_power_on_switch_01.wav" )
 	local padding = 35
 	local w,h = ScrW()/3,ScrH()/2
