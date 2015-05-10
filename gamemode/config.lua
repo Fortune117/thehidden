@@ -11,7 +11,7 @@ GM.RoundTime = 300 //Default: 300.
 GM.RoundLimit = 10  //How many rounds before a map change. Default: 10.
 GM.RoundEndTime = 15 //Default: 15. 
 GM.RoundPrepTimeCustom = 25 --Prep time if custom mode is enabled. This is high so the Hidden has time to select his stats. Default: 25.
-GM.RoundPrepTime = 1 --The round prep time if custom mode is disabled. Default: 15.
+GM.RoundPrepTime = 15 --The round prep time if custom mode is disabled. Default: 15.
 
 GM.SlowAmount = 0 //What the host timeframe is set to when the round ends. Set to 0 to disable. Default: 0.
 
@@ -81,7 +81,7 @@ GM.Hidden.VisionDrain = 2 //Stamina Drained every half second while using Hidden
 // 3 = A player is chosen out of all those who did damage to the Hidden during the previous round. The chance of being selected is relative to damage dealt.
 // 4 = The player who killed the Hidden.
 // 5 = Que system. All players are systematically gone through so everyone gets a turn.
-GM.Hidden.SelectMode = 5 //Default: 3. 
+GM.Hidden.SelectMode = 3 //Default: 3. 
 GM.Hidden.LimitRounds = true // If enabled, the Hidden can only remain the Hidden for a limited number of rounds. Default: true.
 GM.Hidden.MaxRounds = 3 //Determines how many rounds in a row somone can remain the Hidden. Default: 3.
 GM.Hidden.ChangeMapWhenQueComplete = true //Determines if the map should change only if everyone has had a turn as the Hidden (while in Select mode 5). Default: true.

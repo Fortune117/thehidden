@@ -73,7 +73,7 @@ local valid_weapons =
 local TopStats = { ["damage"] = 0, ["cone"] = 5, ["delay"] = 5, ["kick"] = 5, ["clip"]= 0 } 
 local StatBarFuncs = 
 {
-	["damage"] = function( dmg )
+	["damage"] = function( dmg ) 
 		return dmg/TopStats[ "damage" ] 
 	end,
 	["cone"] = function( cone )
@@ -118,6 +118,7 @@ function GetTopStats()
 	end
 end
 
+GetTopStats()
 
 local PANEL = {}
 
