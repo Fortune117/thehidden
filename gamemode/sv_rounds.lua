@@ -95,9 +95,10 @@ RoundChangeFunctions =
 		SetGlobalBool( "InRound", false )
 		GAMEMODE.RoundLimit = GAMEMODE.RoundLimit - 1
 		if GAMEMODE.RoundLimit <= 0 then
-			if GM.Hidden.ChangeMapWhenQueComplete then
+			if GAMEMODE.Hidden.SelectMode == 5 and GAMEMODE.Hidden.ChangeMapWhenQueComplete then
 				if GAMEMODE:QueComplete() then
-					
+					RTV.Start()
+					GAMEMODE:SetRoundTime( 35 )
 				end
 			else
 				RTV.Start()
