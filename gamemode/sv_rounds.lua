@@ -99,6 +99,8 @@ RoundChangeFunctions =
 				if GAMEMODE:QueComplete() then
 					RTV.Start()
 					GAMEMODE:SetRoundTime( 35 )
+				else
+					GAMEMODE:SetRoundTime( GAMEMODE.RoundEndTime )
 				end
 			else
 				RTV.Start()
