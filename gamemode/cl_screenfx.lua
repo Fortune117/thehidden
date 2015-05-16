@@ -207,6 +207,7 @@ function GM:HiddenVisionThink()
 			end
 		else
 			for k,v in pairs( team.GetPlayers( TEAM_HUMAN ) ) do
+				print( v:Nick().." at "..tostring( v:GetPos() ) )
 				if v:Alive() then
 					local effect = EffectData()
 					effect:SetOrigin( v:GetPos() )

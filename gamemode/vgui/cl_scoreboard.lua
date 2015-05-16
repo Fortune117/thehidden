@@ -33,7 +33,7 @@ local scores =
 		local name = ply:Nick() or "undefined"
 		local max = 15
 		if string.len( name ) > max then
-			name = string.sub( ply:Nick() or "undefined", 0, math.min( string.len( ply:Nick() ), 15 ) )..".."
+			name = string.sub( name, 0, math.min( string.len( name ), 15 ) )..".."
 		end
 		return name
 	end},
@@ -57,9 +57,10 @@ function CreatePlayer( ply, ply_team, is_alive )
 	local ply_pnl = vgui.Create( "DPanel", players_panel )
 	ply_pnl:SetSize( players_col:GetWide(), players_panel:GetTall()/10 )
 	ply_pnl:Dock( TOP )
+	ply_pnl.ply = ply 
 	local gap = (ply_pnl:GetWide()/#scores)
 	function ply_pnl:Paint( w, h )
-
+		if not self.ply then return end 
 		if is_alive and ply_team ~= TEAM_SPECTATOR then
 			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, Color( 0, 60, 125, 180) )
 			draw.BlurredBar(  blur+blur_diff, blur+blur_diff, w - (blur+blur_diff)*2, h - (blur+blur_diff)*2 , 0, Color( 8, 8, 8, 255) )

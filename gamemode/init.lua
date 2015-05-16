@@ -62,6 +62,7 @@ function GM:PlayerInitialSpawn( ply )
 
 end
 
+
 function GM:PlayerSpawn( ply )
 
 	if ply:Team() == TEAM_UNASSIGNED then
@@ -598,9 +599,6 @@ function GM:KeyPress( ply, key )
 end 
 
 function GM:AllowPlayerPickup( ply, entity )
-	if ply:Alive() and ply:IsHidden() then
-		return true 
-	end
 	return false 
 end
 
@@ -622,6 +620,14 @@ function GM:Think()
 	end
 	
 end	
+
+function GM:SetupPlayerVisibility( ply, viewent )
+	if ply:IsHidden() then
+		for k,v in pairs( team.GetPlayers( TEAM_HUMAN ) ) do
+			AddOriginToPVS( v:GetPos() )
+		end
+	end
+end  
 
 concommand.Add( "hdn_debug_invis", function( ply ) 
 	if ply:IsAdmin() then

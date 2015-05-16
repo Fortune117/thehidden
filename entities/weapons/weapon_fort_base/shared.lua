@@ -414,7 +414,7 @@ function SWEP:ShootEffects()
 		local mpos = vm:GetAttachment(1)
 		
 		local effect = EffectData()
-		effect:SetOrigin(mpos.Pos)
+		effect:SetOrigin(mpos.Pos or self.Owner:GetShootPos()*5 )
 		effect:SetAngles( self.Owner:GetAimVector():Angle() )
 		effect:SetEntity( self )
 		effect:SetAttachment( 1 )
@@ -440,7 +440,7 @@ function SWEP:ShootBullet( damage, cone, delay, bullets, recoil, force, kick )
 
 	if not IsFirstTimePredicted() then return end
 	
-	self:SendWeaponAnim( (self.Silenced == true and self.SilencedAnims[2] ) or self.Primary.Anim)
+	self.Weapon:SendWeaponAnim( (self.Silenced == true and self.SilencedAnims[2] ) or self.Primary.Anim)
 	
 
 	self:ShootEffects()
@@ -528,7 +528,7 @@ end
 function SWEP:DrawWeaponSelection() end
 
 function SWEP:Deploy()
-	self:SendWeaponAnim( (self.Silenced == true and self.SilencedAnims[1] ) or self.DeployAnim )
+	self.Weapon:SendWeaponAnim( (self.Silenced == true and self.SilencedAnims[1] ) or self.DeployAnim )
 	self:SetNext(0.5)
 	self.Owner:ViewPunch( self.DeployPunch )
 	hook.Call( "OnWeaponDeployed", GAMEMODE, self, self.Owner )

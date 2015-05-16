@@ -29,10 +29,10 @@ blue_glow = { Color( 255, 255, 255, 255 ),  Color( 55, 55, 255, 255 ),  Color( 5
 function GM:CreateTeams()
 	
 	team.SetUp( TEAM_HUMAN, "Jericho", Color( 80, 80, 255 ), true )
-	team.SetSpawnPoint( TEAM_HUMAN, { "info_player_human", "info_player_counterterrorist", "info_player_combine", "info_player_deathmatch" } )
+	team.SetSpawnPoint( TEAM_HUMAN, { "info_player_human", "info_player_counterterrorist", "info_player_combine", "info_player_deathmatch", "info_marine_spawn" } )
 	
 	team.SetUp( TEAM_HIDDEN, "The Hidden", Color( 255, 80, 80 ), false )
-	team.SetSpawnPoint( TEAM_HIDDEN, { "info_player_stalker", "info_player_terrorist", "info_player_rebel", "info_player_start" } )
+	team.SetSpawnPoint( TEAM_HIDDEN, { "info_player_stalker", "info_player_terrorist", "info_player_rebel", "info_player_start", "info_hidden_spawn" } ) 
 	
 	team.SetUp( TEAM_SPECTATOR, "Spectators", Color( 80, 255, 150 ), true )
 	team.SetSpawnPoint( TEAM_SPECTATOR, { "info_player_counterterrorist", "info_player_combine", "info_player_human", "info_player_deathmatch" } ) 

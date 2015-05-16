@@ -22,8 +22,8 @@ function ENT:Initialize()
 	self:SetSolid(SOLID_BBOX)
    	self:SetCollisionGroup(COLLISION_GROUP_PROJECTILE)
 
-	self.ThrowLiveTime = CurTime() + 3
-	self.LiveTime = CurTime() + 1.8
+	self.ThrowLiveTime = CurTime() + 2.6
+	self.LiveTime = CurTime() + 1.4
 
 end
 

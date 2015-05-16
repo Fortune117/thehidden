@@ -15,11 +15,11 @@ function EFFECT:Init( data )
 
 	local sc = self.Entity:Health()/self.Entity:GetMaxHealth()
 
-	local emitter = ParticleEmitter( Pos )
+	self.emitter = ParticleEmitter( Pos )
 	
 		for i=1,math.random(7,11) do
 		
-			local particle = emitter:Add( "sprites/aura", Pos + Vector(0,0,math.random(0,60)))
+			local particle = self.emitter:Add( "sprites/aura", Pos + Vector(0,0,math.random(0,60)))
 			local sz = math.random(8, 11)
 
 			particle:SetVelocity(Vector(math.random(-sidevel,sidevel),math.random(-sidevel,sidevel), math.random(-up_downvel, up_downvel)))
@@ -32,7 +32,6 @@ function EFFECT:Init( data )
 			particle:SetColor( 255 * ( 1 - sc ), 255 * sc, 100 * sc )
 
 		end
-	emitter:Finish()
 end
 
 
@@ -44,6 +43,7 @@ end
 function EFFECT:Render()
 	return true-- Do nothing - this effect is only used to spawn the particles in Init	
 end
+
 
 
 
