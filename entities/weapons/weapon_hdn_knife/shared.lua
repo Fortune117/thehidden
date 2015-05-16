@@ -887,7 +887,9 @@ end
 function SWEP:Deploy()
 	self:Reset()
 	timer.Simple( 0.1, function() 
-		self.Weapon:SendWeaponAnim( ACT_VM_DRAW )
+		if IsValid( self.Weapon ) then
+			self.Weapon:SendWeaponAnim( ACT_VM_DRAW )
+		end
 	end)
 	
 	return true
