@@ -48,3 +48,7 @@ function SWEP:PrimaryAttack()
 		end
 	end 
 end
+
+function SWEP:SecondaryAttack()
+	return true
+end
