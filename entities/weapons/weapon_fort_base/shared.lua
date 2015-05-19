@@ -412,9 +412,13 @@ function SWEP:ShootEffects()
 	
 		local vm = LocalPlayer():GetViewModel()
 		local mpos = vm:GetAttachment(1)
+		if not mpos then
+			mpos = {}
+			mpos.Pos = self.Owner:GetShootPos()*5
+		end
 		
 		local effect = EffectData()
-		effect:SetOrigin(mpos.Pos or self.Owner:GetShootPos()*5 )
+		effect:SetOrigin(mpos.Pos )
 		effect:SetAngles( self.Owner:GetAimVector():Angle() )
 		effect:SetEntity( self )
 		effect:SetAttachment( 1 )
