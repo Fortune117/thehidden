@@ -56,6 +56,11 @@ GM.Hidden.DamageScaleWithPlayers = true //Determines wether or not the Hiddens d
 GM.Hidden.DamageScaleMax =  0.35 //The max percentage of extra damage that the Hidden deals. Default: 0.35.
 GM.Hidden.DamageScaleRatio =  0.015 //How much % extra damage the hidden gets per player. Default: 0.015.
 
+//Hud selection options.
+// legacy - HUD created faithfully from the original Hidden game.
+// new - My version of the HUD.
+GM.Hidden.HUD = "legacy" //Default: legacy.
+
 //Pig Stick Mode
 //1 = Normal pig stick. (High damage attack, with a delay and a sound.)
 //2 = "Charges Mode", acts like a regular Pig Stick attack but it has a limited number of uses.
@@ -136,7 +141,7 @@ GM.Hidden.GrenadeBlindIntensity = 0.97 //Intensity of the blind. Default: 0.97.
  
  --Human Settings
 GM.Jericho = {}
-GM.Jericho.Name = "Jericho" //The name that is displayed on the human side of the scoreboard. Default: Jericho.
+GM.Jericho.Name = "I.R.I.S" //The name that is displayed on the human side of the scoreboard. Default: Jericho.
 GM.Jericho.Health = 100 // Humans hp. Default: 100.
 GM.Jericho.Speed = 265 // Human move speed. Default: 265.
 GM.Jericho.Stamina = 100 // Human stamina. Default: 100.

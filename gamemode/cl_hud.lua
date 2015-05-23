@@ -4,15 +4,57 @@ function draw.Cross( x, y, sz, t )
 	surface.DrawRect( x - t/2, y - sz/2, t, sz )
 end
 
-
-local x = 100
-local y = 30
+local hdn_hp = Material( "hud/hdn_hdnhealth", "noclamp smooth" )
+local hdn_hp_id = surface.GetTextureID( "hud/hdn_hdnhealth" )
+local hdn_stamina = Material( "hud/hdn_staminabar", "noclamp smooth" )
+local hdn_stamina_id = surface.GetTextureID( "hud/hdn_staminabar" )
+local hdn_stamina_bg = Material( "hud/hdn_staminaBG", "noclamp smooth" )
+local hdn_stamina_bg_id = surface.GetTextureID( "hud/hdn_staminaBG" )
+local x = 20
+local y = 20
+local gap = 10
 local col = Color( 235, 235, 235, 255 )
 local h_colglow = Color( 235, 235, 235, 255 )
 local h_colglow2 = Color( 235, 235/2, 235/2, 255 )
 
 local colglow = Color( 235, 235, 235, 255 )
 local colglow2 = Color( 235/2, 235/2, 235, 255 )
+local colglow3 = Color( 235, 235, 235, 255 )
+
+function DrawLegacyHUD( ply )
+	local gm = GAMEMODE
+	local hp = ply:Health()
+	local maxhp = ply:GetMaxHealth()
+	local stamina = ply:GetStamina()
+	local maxstamina = gm.Hidden.Stamina
+	
+	surface.SetDrawColor( 255, 255, 255, 255 )
+	surface.SetMaterial( hdn_hp )
+	local w,h = surface.GetTextureSize( hdn_hp_id )
+	w = w*0.9
+	h = h*0.9
+	surface.DrawTexturedRect( x, ScrH() - y - h*0.8, w, h*0.8 )
+
+	surface.SetFont( "HiddenHUD_Legacy" )
+	local xsz,ysz = surface.GetTextSize( hp )
+	draw.GlowingText( hp , "HiddenHUD_Legacy", x + w/1.7 -xsz/2, ScrH() - y - h*0.8 + ysz/4.5, col, colglow, colglow3)
+
+	local w2,h2 = surface.GetTextureSize( hdn_stamina_bg_id )
+	w2 = w2*0.9
+	h2 = h2*0.9
+	local stamina_y = ScrH() - y - h*0.8 - h2 - gap 
+	surface.SetMaterial( hdn_stamina_bg )
+	surface.DrawTexturedRect( x - 5, stamina_y - 5, w2 + 20, h2 + 10 )
+
+	surface.SetMaterial( hdn_stamina )
+	render.SetScissorRect( x, stamina_y, x + w2*(stamina/maxstamina), stamina_y + h2, true  ) 
+		--surface.DrawRect( 0, 0, ScrW(), ScrH() )
+		surface.DrawTexturedRect( x, stamina_y, w2, h2 + 2 )
+	render.SetScissorRect( 0, 0, 0, 0, false ) 
+end 
+
+local x = 100
+local y = 30
 
 local gap = -4
 local sz = 48
@@ -141,6 +183,12 @@ DrawHud =
 	[ TEAM_HIDDEN ] = function( ply )
 
 		local gm = GAMEMODE
+
+		if gm.Hidden.HUD == "legacy" then
+			DrawLegacyHUD( ply )
+			return 	
+		end
+
 		local hp = ply:Health()
 		local maxhp = ply:GetMaxHealth()
 

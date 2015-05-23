@@ -27,6 +27,8 @@ surface.CreateFont( "HiddenHUDSS", { font = "Trebuchet18", size = 14, weight = 4
 surface.CreateFont( "HiddenHUDSSS", { font = "Trebuchet18", size = 11, weight = 450, scanlines = true, antialias = true } )
 surface.CreateFont( "HiddenHUDSSSS", { font = "Trebuchet18", size = 9, weight = 450, scanlines = true, antialias = true } )
 
+surface.CreateFont( "HiddenHUD_Legacy", { font = "OratorSdt", size = 60, weight = 450, scanlines = true, antialias = true } )
+
 local fontdata = {
 	blursize = 2;
 	italic = false;
