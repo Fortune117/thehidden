@@ -550,9 +550,9 @@ end
 
 function SWEP:Initialize()
 	
-	if self.SetWeaponHoldType then
-		self:SetWeaponHoldType( self.HoldType or "pistol" )
-	end
+	if self.SetHoldType then
+		self:SetHoldType( self.HoldType or "pistol" )
+ 	end
 	util.PrecacheModel( self.WorldModel )
 	util.PrecacheModel( self.ViewModel )
 	self:SetDeploySpeed( self.DeploySpeed or 1 )

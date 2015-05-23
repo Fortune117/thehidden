@@ -194,7 +194,7 @@ function GM:DoPlayerDamageLogic( vic, dmginfo )
 		else
 			//Have to hack in the Pigstick damage force.
 			if atk:IsPlayer() and atk:IsHidden() then
-				if not dmginfo:IsExplosionDamage() then 
+				if not dmginfo:IsExplosionDamage() and not dmginfo:GetDamageType() == DMG_CRUSH then 
 					ply:SetVelocity( dmginfo:GetDamageForce() )
 				else
 					if is_killhit then
@@ -282,7 +282,12 @@ function GM:OnPlayerHealed( ply, amount )
 end
 
 function GM:PlayerDeathThink()
+	return 
+end
 
+function GM:CanPlayerSuicide( ply )
+	if team.GetName( ply:Team() ) == "Spectators" then return false end
+	return true
 end
 
 function GM:PlayerNoClip( ply )

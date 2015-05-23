@@ -8,11 +8,13 @@ local PLY = FindMetaTable( "Player" )
 
 function PLY:SetEquipment( equip )
 	self.Equipment[ 1 ] = equip
-	self:SetNWString( "Equipmetn1", equip )
+	print( type( equip ) )
+	self:SetNWString( "Equipment1", equip )
 end
 
 function PLY:SetEquipment2( equip )
 	self.Equipment[ 2 ] = equip
+	print( type( equip ) )
 	self:SetNWString( "Equipment2", equip )
 end
  
@@ -26,7 +28,7 @@ end
 
 function PLY:SetUpLoadout()
 	self.Equipment = {}
-	self:SetEquipment( table.Random( LDT.Equipment ), table.Random( LDT.Equipment2 ) )
+	self:SetEquipment( tostring( table.Random( LDT.Equipment ) ), tostring( table.Random( LDT.Equipment2 ) ) )
 	self:SetSelectedWeapon( tostring( table.Random( LDT.Weapons ) ) )
 	self.Data = {}
 end
