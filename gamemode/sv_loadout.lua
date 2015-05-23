@@ -8,7 +8,7 @@ local PLY = FindMetaTable( "Player" )
 
 function PLY:SetEquipment( equip )
 	self.Equipment[ 1 ] = equip
-	self:SetNWString( "Equipmetn1", equip )
+	self:SetNWString( "Equipment1", equip )
 end
 
 function PLY:SetEquipment2( equip )
