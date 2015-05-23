@@ -7,12 +7,12 @@ util.AddNetworkString( "SelectEquipment2" )
 local PLY = FindMetaTable( "Player" )
 
 function PLY:SetEquipment( equip )
-	self.Equipment[ 1 ] = equip
-	self:SetNWString( "Equipmetn1", equip )
+	equip = self.Equipment[ 1 ]
+	self:SetNWString( "Equipment1", equip )
 end
 
 function PLY:SetEquipment2( equip )
-	self.Equipment[ 2 ] = equip
+	equip = self.Equipment[ 2 ]
 	self:SetNWString( "Equipment2", equip )
 end
  

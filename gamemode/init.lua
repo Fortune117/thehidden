@@ -285,6 +285,11 @@ function GM:PlayerDeathThink()
 
 end
 
+function GM:CanPlayerSuicide( ply )
+	if team.GetName( ply:Team() ) == "Spectators" then return false end
+	return true
+end
+
 function GM:PlayerNoClip( ply )
 	return not game.IsDedicated() or false 
 end
