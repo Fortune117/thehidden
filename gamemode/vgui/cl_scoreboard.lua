@@ -30,7 +30,7 @@ local y = 2
 local scores =
 { 
 	{"Name", function( ply )
-		if not ply or not ply.Nick then return "undefined" end
+		if not IsValid( ply ) or not ply.Nick then return "undefined" end
 		local name = ply:Nick()
 		local max = 15
 		if string.len( name ) > max then

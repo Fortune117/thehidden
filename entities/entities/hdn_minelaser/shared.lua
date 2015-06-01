@@ -104,7 +104,7 @@ if CLIENT then
 
 	function ENT:Think()
 
-		self.Entity:SetRenderBoundsWS( self.Entity:GetEndPos( ), self.Entity:GetPos( ) )
+		self:SetRenderBoundsWS( self:GetEndPos( ), self:GetPos( ) )
 		
 	end
 
