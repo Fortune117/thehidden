@@ -196,7 +196,7 @@ function GM:DoPlayerDamageLogic( vic, dmginfo )
 			if atk:IsPlayer() and atk:IsHidden() then
 				if not dmginfo:IsExplosionDamage() and not dmginfo:GetDamageType() == DMG_CRUSH then 
 					ply:SetVelocity( dmginfo:GetDamageForce() )
-				else
+				elseif dmginfo:IsExplosionDamage() then
 					if is_killhit then
 						ply:Gore( VectorRand()*10 )
 					else
@@ -394,7 +394,13 @@ local hidden_select_funcs =
  
 
 function GM:SelectNewHidden() 
-	hidden_select_funcs[ self.Hidden.SelectMode ]():SetTeam( TEAM_HIDDEN )
+	if self.eForcedHidden then
+		print( "[HDN]: "..self.eForcedHidden:Nick().." has been forced to be hidden.")
+		self.eForcedHidden:SetTeam( TEAM_HIDDEN )
+		self.eForcedHidden = nil 
+	else
+		hidden_select_funcs[ self.Hidden.SelectMode ]():SetTeam( TEAM_HIDDEN )
+	end
 	self.ShouldChangeHidden = false
 	self.HiddenRounds = 0
 end
@@ -654,3 +660,44 @@ concommand.Add( "hdn_debug_damage", function( ply )
 		ply:TakeDamage( 9 )
 	end
 end)
+
+function FindPlayer(name)
+	name = string.lower(name);
+	for _,v in ipairs(player.GetAll()) do
+		if(string.find(string.lower(v:Name()),name,1,true) != nil)
+			then return v;
+		end
+	end
+end
+
+concommand.Add( "hdn_forcehidden", function( ply, cmd, args )
+	local targname = args[ 1 ]
+	if not args[ 1 ] then
+		print("[HDN]: ".."You did not enter a name." )
+		return 
+	end
+
+	local ply = FindPlayer( args[ 1 ] )
+	if not ply then
+		print("[HDN]: ".."Invalid target." )
+		return 
+	end
+	print("[HDN]: "..ply:Nick().." will become the Hidden next round." )
+	GAMEMODE.eForcedHidden = ply 
+end )
+
+concommand.Add( "hdn_spechidden", function( ply )
+	local hidden = GetHidden()
+	if hidden then
+		if ply:Alive() then
+			ply:KillSilent() 
+		end 
+		ply:SetTeam( TEAM_SPECTATOR )
+		ply:SetMoveType( MOVETYPE_NOCLIP )
+		ply:Spectate( OBS_MODE_CHASE )
+		ply:SpectateEntity( hidden )
+		return 
+	end
+	print( "[HDN]: ".."There is no Hidden at this time.")
+end)
+

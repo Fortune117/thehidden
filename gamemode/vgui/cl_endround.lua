@@ -20,9 +20,7 @@ local bar_blur = 5
 local bar_h = 4
  
 function EndRoundEvent( )
-	local endscreen_w = ScrW()/2
-	local eye_mat = Material( "misc/eye.png", "noclamp smooth")
-	local eye_sz = endscreen_w/4 
+	local endscreen_w = ScrW()/1.3
 
 	local winner = net.ReadInt( 8 )
 	local team_name = net.ReadString() 

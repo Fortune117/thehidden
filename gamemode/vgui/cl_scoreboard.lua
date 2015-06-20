@@ -30,7 +30,7 @@ local y = 2
 local scores =
 { 
 	{"Name", function( ply )
-		if not IsValid( ply ) or not ply.Nick then return "undefined" end
+		if not IsValid( ply ) or not ply.Nick then return "Disconnected" end
 		local name = ply:Nick()
 		local max = 15
 		if string.len( name ) > max then
@@ -52,7 +52,7 @@ local scores =
 	end}
 }
 
-local blur = 2
+local blur = 3
 local blur_diff = 2
 function CreatePlayer( ply, ply_team, is_alive )
 	local ply_pnl = vgui.Create( "DPanel", players_panel )
@@ -61,9 +61,13 @@ function CreatePlayer( ply, ply_team, is_alive )
 	ply_pnl.ply = ply 
 	local gap = (ply_pnl:GetWide()/#scores)
 	function ply_pnl:Paint( w, h )
-		if not self.ply then return end 
+		if not IsValid( ply ) then return end 
 		if is_alive and ply_team ~= TEAM_SPECTATOR then
-			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, Color( 0, 60, 125, 180) )
+			local cOutlineColor = Color( 0, 60, 125, 180 )
+			if ply:IsAdmin() and GAMEMODE.Admin.bShowOnScoreboard then
+				cOutlineColor = GAMEMODE.Admin.cScoreboardColor
+			end
+			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, cOutlineColor )
 			draw.BlurredBar(  blur+blur_diff, blur+blur_diff, w - (blur+blur_diff)*2, h - (blur+blur_diff)*2 , 0, Color( 8, 8, 8, 255) )
 		else
 			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, Color( 55, 55, 55, 180) )

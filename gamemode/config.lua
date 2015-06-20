@@ -59,7 +59,7 @@ GM.Hidden.DamageScaleRatio =  0.015 //How much % extra damage the hidden gets pe
 //Hud selection options.
 // legacy - HUD created faithfully from the original Hidden game.
 // new - My version of the HUD.
-GM.Hidden.HUD = "legacy" //Default: legacy.
+GM.Hidden.HUD = "new" //Default: legacy.
 
 //Pig Stick Mode
 //1 = Normal pig stick. (High damage attack, with a delay and a sound.)
@@ -187,6 +187,10 @@ GM.MedpackRechargeTime = 35 //The amount of time (seconds) that it takes for the
 GM.MedpackUses = 2 //How many times a medpack can be used in one full charge.
 GM.TranqBlindDuration = 12 //How long a tranq dart affects the hiddens vision. Default: 12.
 GM.TranqBlindIntensity = 0.96 //How intense the blind effect is. Default: 0.96. Note: Don't put this above 0.98, it'll do some odd stuff.
+
+GM.Admin = {}
+GM.Admin.bShowOnScoreboard = true 
+GM.Admin.cScoreboardColor = Color( 255, 162, 0, 60 ) 
 
 
 GM.InfoText = [[
