@@ -70,7 +70,11 @@ function CreatePlayer( ply, ply_team, is_alive )
 			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, cOutlineColor )
 			draw.BlurredBar(  blur+blur_diff, blur+blur_diff, w - (blur+blur_diff)*2, h - (blur+blur_diff)*2 , 0, Color( 8, 8, 8, 255) )
 		else
-			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, Color( 55, 55, 55, 180) )
+			local cOutlineColor = Color( 55, 55, 55, 180)
+			if ply:IsAdmin() and GAMEMODE.Admin.bShowOnScoreboard then
+				cOutlineColor = GAMEMODE.Admin.cScoreboardColor
+			end
+			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, cOutlineColor  )
 			draw.BlurredBar(  blur+blur_diff, blur+blur_diff, w - (blur+blur_diff)*2, h - (blur+blur_diff)*2 , 0, Color( 0, 0, 0, 255) )
 		end 
 
