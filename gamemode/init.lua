@@ -671,6 +671,10 @@ function FindPlayer(name)
 end
 
 concommand.Add( "hdn_forcehidden", function( ply, cmd, args )
+	if not ply:IsAdmin() then
+		print( "[HDN]: ".."Insufficient permissions.")
+		return 
+	end
 	local targname = args[ 1 ]
 	if not args[ 1 ] then
 		print("[HDN]: ".."You did not enter a name." )
@@ -687,6 +691,10 @@ concommand.Add( "hdn_forcehidden", function( ply, cmd, args )
 end )
 
 concommand.Add( "hdn_spechidden", function( ply )
+	if not ply:IsAdmin() then
+		print( "[HDN]: ".."Insufficient permissions.")
+		return 
+	end
 	local hidden = GetHidden()
 	if hidden then
 		if ply:Alive() then
