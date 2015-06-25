@@ -64,16 +64,10 @@ function CreatePlayer( ply, ply_team, is_alive )
 		if not IsValid( ply ) then return end 
 		if is_alive and ply_team ~= TEAM_SPECTATOR then
 			local cOutlineColor = Color( 0, 60, 125, 180 )
-			if ply:IsAdmin() and GAMEMODE.Admin.bShowOnScoreboard then
-				cOutlineColor = GAMEMODE.Admin.cScoreboardColor
-			end
 			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, cOutlineColor )
 			draw.BlurredBar(  blur+blur_diff, blur+blur_diff, w - (blur+blur_diff)*2, h - (blur+blur_diff)*2 , 0, Color( 8, 8, 8, 255) )
 		else
 			local cOutlineColor = Color( 55, 55, 55, 180)
-			if ply:IsAdmin() and GAMEMODE.Admin.bShowOnScoreboard then
-				cOutlineColor = GAMEMODE.Admin.cScoreboardColor
-			end
 			draw.BlurredBar(  blur, blur, w - blur*2, h - blur*2 , blur, cOutlineColor  )
 			draw.BlurredBar(  blur+blur_diff, blur+blur_diff, w - (blur+blur_diff)*2, h - (blur+blur_diff)*2 , 0, Color( 0, 0, 0, 255) )
 		end 
@@ -81,9 +75,13 @@ function CreatePlayer( ply, ply_team, is_alive )
 		local font = ScrW() < 1300 and "HiddenHUDMS" or "HiddenHUDScoreL"
 		for i = 1,#scores do
 			if i == 1 then
+				local cOutlineColor = Color( 235, 235, 235, 255)
+				if ply:IsAdmin() and GAMEMODE.Admin.bShowOnScoreboard then
+					cOutlineColor = GAMEMODE.Admin.cScoreboardColor
+				end
 				surface.SetFont( font )
 				local xsz, ysz = surface.GetTextSize( scores[ i ][ 2 ]( ply ) )
-				draw.AAText( scores[ i ][ 2 ]( ply ), font, 12, self:GetTall()/2 - ysz/2, Color( 235, 235, 235, 255), TEXT_ALIGN_LEFT )
+				draw.AAText( scores[ i ][ 2 ]( ply ), font, 12, self:GetTall()/2 - ysz/2, cOutlineColor, TEXT_ALIGN_LEFT )
 				_ysz = ysz
 			else
 				surface.SetFont( font )
@@ -278,12 +276,18 @@ function CreateScoreboard()
 			local bar_y = 7 + ysz
 			draw.BlurredBar(  5, bar_y , w - 10 , 4 , 3, Color( 255, 255, 255, 255 ) )
 
-			local nick = GetHidden():Nick()
+			local hdn = GetHidden()
+			local nick = hdn:Nick()
 			local name = string.len( nick ) > 10 and string.sub( nick, 1, 10 )..".." or nick
 			local font = ScrW() < 1500 and "HiddenHUDML" or "HiddenHUD"
 			surface.SetFont( font )
 			local xsz, ysz = surface.GetTextSize( name )
-			draw.GlowingText( name , font, image_sz + left_over/2 - xsz/2, bar_y + 2, unpack( white_glow ) )
+
+			local cOutlineColor = { Color( 235, 235, 235, 255) }
+			if hdn:IsAdmin() and GAMEMODE.Admin.bShowOnScoreboard then
+				cOutlineColor = GAMEMODE.Admin.cScoreboardColor2
+			end
+			draw.GlowingText( name , font, image_sz + left_over/2 - xsz/2, bar_y + 2, unpack( cOutlineColor ) )
 
 			draw.BlurredBar( image_sz + left_over/2 - xsz/2 - 3 , bar_y + ysz , xsz + 8 , 1 , 2, Color( 255, 255, 255, 255 ) )
 

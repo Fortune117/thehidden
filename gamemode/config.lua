@@ -191,6 +191,7 @@ GM.TranqBlindIntensity = 0.96 //How intense the blind effect is. Default: 0.96. 
 GM.Admin = {}
 GM.Admin.bShowOnScoreboard = true 
 GM.Admin.cScoreboardColor = Color( 255, 162, 0, 60 ) 
+GM.Admin.cScoreboardColor2 = { Color( 255, 255, 255, 255 ), Color( 255, 162, 0, 255 ), Color( 255, 162, 0, 255 ) }
 
 
 GM.InfoText = [[
