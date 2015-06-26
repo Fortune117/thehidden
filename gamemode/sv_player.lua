@@ -228,6 +228,7 @@ function PLY:ResetData()
 	self:SetCanJump( true )
 	self:SetHiddenDamage( 0 )
 	self:StripAmmo()
+	self.PigSticked = false 
 end
 
 function PLY:SetCaptain( bool )

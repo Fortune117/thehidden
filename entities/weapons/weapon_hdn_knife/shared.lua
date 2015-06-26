@@ -736,6 +736,7 @@ function SWEP:Pickup()
          self.PrevOwner = self.EntHolding:GetOwner()
 
          self.EntHolding:SetOwner(ply)
+         self.EntHolding:SetPhysicsAttacker( ply )
 
          local phys = self.CarryHack:GetPhysicsObject()
          if IsValid(phys) then
