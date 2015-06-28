@@ -86,9 +86,9 @@ LDT.Equipment =
 		end
 	end },
 
-	["Disintegrator Mine"] = { name = "Laser", desc = "An explosive device used to dispose of corpses. Does minor blast damage.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
+	["Disintegrator Mine"] = { name = "DLaser", desc = "An explosive device used to dispose of corpses. Does minor blast damage.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
 		if IsValid( ply ) then
-			if ply:HasEquipment( "Laser" ) then
+			if ply:HasEquipment( "DLaser" ) then
 				ply:Give( "weapon_hdn_laser" )
 			end
 		end
