@@ -19,9 +19,9 @@ SWEP.UseHands			= true
 SWEP.ViewModel			= "models/weapons/c_crowbar.mdl"
 SWEP.WorldModel			= "models/weapons/w_crowbar.mdl"
 SWEP.ViewModelFOV		= 10
-SWEP.Primary.DefaultClip = 2
-SWEP.Primary.ClipMax 	= 2
-SWEP.Primary.ClipSize = 2
+SWEP.Primary.DefaultClip = 3
+SWEP.Primary.ClipMax 	= 3
+SWEP.Primary.ClipSize = 3
 SWEP.Primary.Ammo = "AlyxGun"
 SWEP.Primary.AutoMatic = false 
 

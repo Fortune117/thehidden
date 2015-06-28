@@ -56,6 +56,7 @@ function GM:PlayerInitialSpawn( ply )
 	else
 		ply:SetTeam(TEAM_SPECTATOR)
 		ply:Spectate(OBS_MODE_ROAMING)
+		ply:Spawn()
 	end
 	
 	ply.NextVoice = CurTime()

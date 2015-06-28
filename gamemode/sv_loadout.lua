@@ -34,7 +34,6 @@ function PLY:SetUpLoadout()
 end
 
 function PLY:ApplyLoadOut()
-	self:Give( self:GetSelectedWeapon() )
 	hook.Call( "OnLoadoutGiven", GAMEMODE, self, self:GetSelectedWeapon()  )
 end
 
@@ -43,9 +42,9 @@ net.Receive( "SelectWeapon", function( len, ply )
 end)
 
 net.Receive( "SelectEquipment", function( len, ply )
-	ply:SetEquipment( net.ReadString() )
+	ply.TempEquipment1 = net.ReadString()
 end)
 
 net.Receive( "SelectEquipment2", function( len, ply )
-	ply:SetEquipment2( net.ReadString() )
+	ply.TempEquipment2 = net.ReadString()
 end)

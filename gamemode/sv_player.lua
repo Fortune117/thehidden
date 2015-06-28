@@ -91,6 +91,7 @@ TeamSetUp =
 		ply:AllowFlashlight( GAMEMODE.Jericho.AllowFlashlight )
 		ply:SetupHands()
 		ply:SetNextVoice( VO_IDLE, math.random( 15, 45 ), false )
+		ply:StripWeapons()
 
 		ply:SetRenderMode( RENDERMODE_NORMAL )
 		ply:SetColor( Color( 255, 255, 255, 255 ) )
@@ -148,6 +149,19 @@ function PLY:SetUpForRound( team )
 
 	TeamSetUp[ team ]( self ) 
 end 
+
+function PLY:ApplyLoadout()
+	if self.TempEquipment1 then
+		self:SetEquipment( self.TempEquipment1 )
+	end 
+	if self.TempEquipment2 then 
+		self:SetEquipment2( self.TempEquipment2 )
+	end
+	if self.SelectedWeapon then
+		self:Give( self.SelectedWeapon )
+	end
+	hook.Call( "HDN_PlayerLoadoutApply", GAMEMODE, self )
+end
  
 function PLY:Pounce()
 

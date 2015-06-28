@@ -149,7 +149,7 @@ DrawHud =
 		if not IsValid( wep ) then return end
 		local clip = wep:Clip1()
 		local clipmax = wep.Primary.ClipSize
-		if clipmax <= -1 then return end 
+		if clip <= -1 then return end 
 		local ammo = ply:GetAmmoCount( wep.Primary.Ammo )
 		local spare_ammo = ammo > 1000 and "Inf" or ammo
 

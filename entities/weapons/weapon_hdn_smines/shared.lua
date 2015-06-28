@@ -27,10 +27,10 @@ SWEP.Primary.Recoil				= 0
 SWEP.Primary.Damage				= -1
 SWEP.Primary.NumShots			= -1
 SWEP.Primary.Cone				= -1
-SWEP.Primary.ClipSize			= 3
-SWEP.Primary.DefaultClip		= 3
+SWEP.Primary.ClipSize			= 4
+SWEP.Primary.DefaultClip		= 4
 SWEP.Primary.Automatic   		= false
-SWEP.Primary.Ammo         		= "none"
+SWEP.Primary.Ammo         		= "none" 
 
 SWEP.Secondary.Delay			= 1
 SWEP.Secondary.Recoil			= 0

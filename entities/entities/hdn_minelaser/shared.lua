@@ -104,7 +104,7 @@ if CLIENT then
 
 	function ENT:Think()
 
-		self:SetRenderBoundsWS( self:GetEndPos( ), self:GetPos( ) )
+		self:SetRenderBoundsWS( self:GetEndPos( ), self:GetStartPos( ) )
 		
 	end
 
@@ -130,8 +130,7 @@ if CLIENT then
 		render.DrawBeam( self.Entity:GetEndPos(), self.Entity:GetStartPos(), 1, offset, offset + distance / 8, col )
 		
 		render.SetMaterial( self.Light )
-		render.DrawQuadEasy( self.Entity:GetEndPos() + normal, normal, size, size, col, 0 )
-		render.DrawQuadEasy( self.Entity:GetPos(), normal * -1, size, size, col, 0 )
+		render.DrawSprite( self.Entity:GetEndPos() + normal, size, size, col, 0 )
 		 
 	end
 end

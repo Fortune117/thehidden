@@ -89,6 +89,9 @@ RoundChangeFunctions =
 		SetGlobalBool( "InRound", true )
 		for k,v in pairs( player.GetAll() ) do
 			v:Freeze( false )
+			if not v:IsHidden() then
+				v:ApplyLoadout()
+			end 
 		end
 	end,
 	[ROUND_ENDED] = function()

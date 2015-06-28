@@ -38,7 +38,7 @@ LDT.Equipment =
 	["Heavy Armor"] = { name = "HeavyArmor", desc = "Increased durability at the cost of movespeed.", hooks = {"EntityTakeDamage", "HDN_MoveSpeed"}, funcs = { function( ply, dmginfo )
 		if IsValid( ply ) and ply:IsPlayer() and not ply:IsHidden() then
 			if ply:HasEquipment( "HeavyArmor" ) then
-				dmginfo:ScaleDamage( 0.65 )
+				dmginfo:ScaleDamage( 0.7 )
 				print( "HEAVY ARMOR: "..dmginfo:GetDamage() )
 			end
 		end
@@ -49,7 +49,7 @@ LDT.Equipment =
 		end
 	end } },
 
-	["Stim Pack"] = { name = "Stimpack", desc = "Heal yourself for a small amount, or an ally for a moderate amount. Has to recharge with each use.", hooks = "OnLoadoutGiven", funcs =  function( ply )
+	["Stim Pack"] = { name = "Stimpack", desc = "Heal yourself for a small amount, or an ally for a moderate amount. Has to recharge with each use.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
 		if IsValid( ply ) then
 			if ply:HasEquipment( "Stimpack" ) then
 				ply:Give( "weapon_hdn_stimpack" )
@@ -60,18 +60,17 @@ LDT.Equipment =
 	["Light Armor"] = { name = "LightArmor", desc = "A thinner armor that allows for more mobility.", hooks = {"EntityTakeDamage", "HDN_MoveSpeed"}, funcs = { function( ply, dmginfo )
 		if IsValid( ply ) and ply:IsPlayer() and not ply:IsHidden() then
 			if ply:HasEquipment( "LightArmor" ) then
-				dmginfo:ScaleDamage( 1.35 )
-				print( "LIGHT ARMOR: "..dmginfo:GetDamage() )
+				dmginfo:ScaleDamage( 1.15 )
 			end
 		end
 	end,
 	function( ply ) 
-		if IsValid( ply ) and ply:HasEquipment( "HeavyArmor" ) then
-			return 1.2
+		if IsValid( ply ) and ply:HasEquipment( "LightArmor" ) then
+			return 1.25
 		end
 	end } },
 
-	["Trip Mine"] = { name = "Mine", desc = "A single high damage mine; deals 50 damage if triggered.", hooks = "OnLoadoutGiven", funcs =  function( ply )
+	["Trip Mine"] = { name = "Mine", desc = "A single high damage mine; deals 50 damage if triggered.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
 		if IsValid( ply ) then
 			if ply:HasEquipment( "Mine" ) then
 				ply:Give( "weapon_hdn_mines" )
@@ -79,10 +78,18 @@ LDT.Equipment =
 		end
 	end },
 
-	["Sonic Alarms"] = { name = "SMines", desc = "A set of three mines that emit a noise when the Hidden passes through.", hooks = "OnLoadoutGiven", funcs =  function( ply )
+	["Sonic Alarms"] = { name = "SMines", desc = "A set of four mines that emit a noise when the Hidden passes through.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
 		if IsValid( ply ) then
 			if ply:HasEquipment( "SMines" ) then
 				ply:Give( "weapon_hdn_smines" )
+			end
+		end
+	end },
+
+	["Disintegrator Mine"] = { name = "Laser", desc = "An explosive device used to dispose of corpses. Does minor blast damage.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
+		if IsValid( ply ) then
+			if ply:HasEquipment( "Laser" ) then
+				ply:Give( "weapon_hdn_laser" )
 			end
 		end
 	end }
@@ -90,7 +97,7 @@ LDT.Equipment =
 
 LDT.Equipment2 = 
 {
-	["P228 Sidearm"] = { name = "p228", desc = "A low calibur pistol with a large clip. Has infinite ammo.", hooks = "OnLoadoutGiven", funcs =  function( ply )
+	["P228 Sidearm"] = { name = "p228", desc = "A low calibur pistol with a large clip. Has infinite ammo.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
 		if IsValid( ply ) then
 			if ply:HasEquipment( "p228" ) then
 				ply:Give( "weapon_hdn_p228" )
@@ -98,7 +105,7 @@ LDT.Equipment2 =
 		end
 	end },
 
-	["Desert Eagle Sidearm"] = { name = "Deagle", desc = "A very powerful pistol, packing a hard hitting punch but at the cost of its clipsize. Comes with three clips.", hooks = "OnLoadoutGiven", funcs =  function( ply )
+	["Desert Eagle Sidearm"] = { name = "Deagle", desc = "A very powerful pistol, packing a hard hitting punch but at the cost of its clipsize. Comes with three clips.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
 		if IsValid( ply ) then
 			if ply:HasEquipment( "Deagle" ) then
 				ply:Give( "weapon_hdn_deagle" )
@@ -106,7 +113,7 @@ LDT.Equipment2 =
 		end
 	end },
 
-	["Tranquilizer"] = { name = "Tranq", desc = "Used to knock out large beats, blurs the Hiddens vision for "..GM.TranqBlindDuration.." seconds. Has 18 darts.", hooks = "OnLoadoutGiven", funcs =  function( ply )
+	["Tranquilizer"] = { name = "Tranq", desc = "Used to knock out large beasts, blurs the Hiddens vision for "..GM.TranqBlindDuration.." seconds. Has 18 darts.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
 		if IsValid( ply ) then
 			if ply:HasEquipment( "Tranq" ) then
 				ply:Give( "weapon_hdn_tranq" )
@@ -114,7 +121,7 @@ LDT.Equipment2 =
 		end
 	end },
 
-	["Experimental Regenerator"] = { name = "Regen", desc = "Recover 1hp every 2-4 seconds.", hooks = "Think", funcs =  function(  )
+	["Experimental Regenerator"] = { name = "Regen", desc = "Recover 3hp every 2 second.", hooks = "Think", funcs =  function(  )
 		if CLIENT then return end
 		for k,ply in pairs( player.GetAll() ) do
 			if IsValid( ply ) then
@@ -124,8 +131,8 @@ LDT.Equipment2 =
 					end
 					if ply:Health() < ply:GetMaxHealth() then
 						if CurTime() > ply.RegenDelay then
-							ply:SetHealth( ply:Health()+1 )
-							ply.RegenDelay = CurTime() + math.random( 2, 4 )
+							ply:Heal( 3 )
+							ply.RegenDelay = CurTime() + 2
 						end
 					end 
 				end
@@ -135,6 +142,9 @@ LDT.Equipment2 =
 	["Laser Sight"] = { name = "Laser", desc = "Gives you a laser sight. Improves accuracy and recoil control.", hooks = { "PostDrawOpaqueRenderables", "HDN_RecoilCallback" }, funcs =  { function( ) 
 		for k,ply in pairs( player.GetAll() ) do
 			if ply:HasEquipment( "Laser" ) and ply:Alive() then
+				local wep = ply:GetActiveWeapon()
+				if not IsValid( wep ) then continue end 
+				if table.HasValue( GAMEMODE.LaserSightBlackList,  wep:GetClass() ) then continue end 
 				local tr = util.QuickTrace( ply:GetShootPos(), ply:GetAimVector()*9000, {ply} )
 				local sz = math.random( 16, 18 )
 				render.SetMaterial( Laser_Mat )
@@ -148,7 +158,7 @@ LDT.Equipment2 =
 		end
 	end  } },
 
-	["Ammo Bags"] = { name = "ABox", desc = "Player starts with two extra ammo packs. Left click to throw the pack on the ground. E to pick up.", hooks = "OnLoadoutGiven", funcs =  function( ply )
+	["Ammo Bags"] = { name = "ABox", desc = "Player starts with three extra ammo packs. Left click to throw the pack on the ground. E to pick up.", hooks = "HDN_PlayerLoadoutApply", funcs =  function( ply )
 		if IsValid( ply ) then
 			if ply:HasEquipment( "ABox" ) then
 				ply:Give( "weapon_hdn_ammobox" )

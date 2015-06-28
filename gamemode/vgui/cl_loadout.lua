@@ -379,18 +379,6 @@ function PANEL:Init()
 	self.Equipment1:SetSize( e_w, e_h )
 	self.Equipment1:SetPos( padding, padding + w_h + 35 )
 	self.Equipment1.Selected = 0
-	self.Equipment1.PaintOver = function( self, w, h )
-
-		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
-			surface.SetDrawColor( Color( 11, 11, 11, 250 ) )
-			surface.DrawRect( 0, 0, w, h )
-
-			local text = "Disabled while round is in progress."
-			surface.SetFont( "HiddenHUDSS" )
-			local xsz, ysz = surface.GetTextSize( text )
-			draw.GlowingText( text, "HiddenHUDSS", w/2 - xsz/2, h/2 - ysz/2, unpack( white_glow ) )
-		end
-	end
 
 
 	local label = vgui.Create( "DPanel", self.Equipment1 )
@@ -414,12 +402,8 @@ function PANEL:Init()
 		equipment.TargBlur = 1
 		equipment.Alpha = 80
 		equipment.MaxAlpha = 255
-		equipment.TargAlpha = equipment.Alpha
+		equipment.TargAlpha = equipment.Alpha 
 		equipment:SetToolTip( v.desc )
-		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
-			equipment:SetEnabled( false )
-			equipment.MaxAlpha = 80
-		end
 
 
 		local tick = Material( "icon16/tick.png", "noclamp smooth" )
@@ -487,18 +471,6 @@ function PANEL:Init()
 	self.Equipment2:SetSize( e_w, e_h )
 	self.Equipment2:SetPos( w - padding - e_w, padding + w_h + 35 )
 	self.Equipment2.Selected = 0
-	self.Equipment2.PaintOver = function( self, w, h )
-
-		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
-			surface.SetDrawColor( Color( 11, 11, 11, 250 ) )
-			surface.DrawRect( 0, 0, w, h )
-
-			local text = "Disabled while round is in progress."
-			surface.SetFont( "HiddenHUDSS" )
-			local xsz, ysz = surface.GetTextSize( text )
-			draw.GlowingText( text, "HiddenHUDSS", w/2 - xsz/2, h/2 - ysz/2, unpack( white_glow ) )
-		end
-	end
 
 	local label = vgui.Create( "DPanel", self.Equipment2 )
 	label:SetSize( e_w, 30 )
@@ -524,10 +496,6 @@ function PANEL:Init()
 		equipment.MaxAlpha = 255
 		equipment.TargAlpha = equipment.Alpha
 		equipment:SetToolTip( v.desc )
-		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
-			equipment:SetEnabled( false )
-			equipment.MaxAlpha = 80
-		end
 
 		local tick = Material( "icon16/tick.png", "noclamp smooth" )
 		local cross = Material( "icon16/cross.png", "noclamp smooth" )
@@ -623,11 +591,6 @@ function PANEL:RecreateEquipment()
 		equipment.MaxAlpha = 255
 		equipment.TargAlpha = equipment.Alpha
 		equipment:SetToolTip( v.desc )
-		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
-			equipment:SetEnabled( false )
-			equipment.MaxAlpha = 80
-		end
-
 
 		local tick = Material( "icon16/tick.png", "noclamp smooth" )
 		local cross = Material( "icon16/cross.png", "noclamp smooth" )
@@ -712,10 +675,6 @@ function PANEL:RecreateEquipment()
 		equipment.MaxAlpha = 255
 		equipment.TargAlpha = equipment.Alpha
 		equipment:SetToolTip( v.desc )
-		if LocalPlayer():Alive() and GAMEMODE:GetRoundState() == ROUND_ACTIVE then
-			equipment:SetEnabled( false )
-			equipment.MaxAlpha = 80
-		end
 
 		local tick = Material( "icon16/tick.png", "noclamp smooth" )
 		local cross = Material( "icon16/cross.png", "noclamp smooth" )

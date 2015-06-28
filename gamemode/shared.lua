@@ -40,6 +40,16 @@ function GM:CreateTeams()
 
 end 
 
+local PLY = FindMetaTable( "Player" )
+local oldAlive = oldAlive or PLY.Alive
+
+function PLY:Alive()
+	if oldAlive( self ) and self:GetObserverMode() == OBS_MODE_NONE then
+		return true
+	end
+	return false 
+end
+
 function GM:PlayerSelectSpawn( ply, failed )
 	local ply_team = ply:Team()
 	local spawns = team.GetSpawnPoints( ply_team )
@@ -170,7 +180,7 @@ function util.GetLivingPlayers(class)
    local count = 0
    local players = {}
    for k, v in ipairs(team.GetPlayers(class)) do
-      if (v:Alive() and v:GetObserverMode() == OBS_MODE_NONE) then
+      if v:Alive() then
          count = count + 1
          players[ #players+1 ] = v
       end

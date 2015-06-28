@@ -26,7 +26,7 @@ function ENT:Initialize()
 
 
 	self:SetHealth( 5 )
-	self.PlaceTime = CurTime() + 5
+	self.PlaceTime = CurTime() + 3
 
 end
 

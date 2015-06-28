@@ -17,7 +17,7 @@ SWEP.Base				= "weapon_fort_base"
 
 SWEP.Primary.Ammo       = "Pistol" -- Type of ammo
 SWEP.Primary.Recoil 	= 2
-SWEP.Primary.Damage 	= 18 // Damage
+SWEP.Primary.Damage 	= 20 // Damage
 SWEP.Primary.Delay 		= 0.097 //Delay between shots.
 SWEP.Primary.Cone 		= 0.005 // Cone
 SWEP.Primary.ClipSize = 20

@@ -181,6 +181,10 @@ function ENTITY:Gore( dir )
 
 				end	
 
+				local ed = EffectData()
+				ed:SetOrigin( doll:GetPos() )
+				util.Effect( "hdn_gore", ed, true, true )
+
 				continue
 
 			elseif i < 3 then
@@ -219,6 +223,11 @@ function ENTITY:Gore( dir )
 					phys:ApplyForceCenter( dir * math.random( 3000, 6000 ) )
 
 				end	
+
+
+				local ed = EffectData()
+				ed:SetOrigin( doll:GetPos() )
+				util.Effect( "hdn_gore", ed, true, true )
 
 				continue
 
