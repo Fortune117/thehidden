@@ -38,7 +38,7 @@ function GM:CreateTeams()
 	team.SetSpawnPoint( TEAM_SPECTATOR, { "info_player_counterterrorist", "info_player_combine", "info_player_human", "info_player_deathmatch" } ) 
 	team.SetSpawnPoint( TEAM_UNASSIGNED, { "info_player_counterterrorist", "info_player_combine", "info_player_human", "info_player_deathmatch" } ) 
 
-end
+end 
 
 function GM:PlayerSelectSpawn( ply, failed )
 	local ply_team = ply:Team()
@@ -168,15 +168,15 @@ end
 
 function util.GetLivingPlayers(class)
    local count = 0
+   local players = {}
    for k, v in ipairs(team.GetPlayers(class)) do
       if (v:Alive() and v:GetObserverMode() == OBS_MODE_NONE) then
          count = count + 1
+         players[ #players+1 ] = v
       end
    end
-   
-   return count
+   return count, players
 end
-
 function GM:PlayerFootstep( ply, pos, foot, snd, vol )
 	if ply:IsHidden() then
 		sound.Play( snd, pos, 50, 100, 0.25)

@@ -93,7 +93,7 @@ GM.Hidden.ChangeMapWhenQueComplete = true //Determines if the map should change 
 
 
 --Take care editing these. It can, and will, unbalance the game if you don't edit them reasonably.
-GM.Hidden.CustomMode = false //Determines wether or not the hidden can choose to edit their stats at the start of the round. Default: true.
+GM.Hidden.CustomMode = false //Determines wether or not the hidden can choose to edit their stats at the start of the round. Default: true. 
 GM.Hidden.AttributePoints = 30 //The amount of ap that the hiddens gets when the round starts.
 GM.Hidden.HealthPerStrength = 5 //How much hp the hidden gets from each point of strength. Default: 5.
 GM.Hidden.BaseHealth = 50 //The base health of the Hidden with no points in strength. Default: 50.
