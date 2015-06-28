@@ -43,24 +43,9 @@ end
 function GM:PlayerSelectSpawn( ply, failed )
 	local ply_team = ply:Team()
 	local spawns = team.GetSpawnPoints( ply_team )
-	local _spawns = team.GetSpawnPoints( (ply_team == TEAM_HIDDEN and TEAM_HUMAN or TEAM_HIDDEN ) )
 	local valid_spawns = {}
 	if failed then 
 		return table.Random( spawns )
-	end
-
-	if #spawns == 0 then
-		for k,spwn in pairs( _spawns ) do
-			local content = util.PointContents( spwn:GetPos() )
-			if content == CONTENTS_EMPTY then
-				valid_spawns[ #valid_spawns+1 ] = spwn
-			end
-		end
-
-		if #valid_spawns < 1 then
-			return table.Random( _spawns )
-		end
-		return table.Random( valid_spawns )
 	end
 
 	for k,spwn in pairs( spawns ) do
@@ -183,15 +168,13 @@ end
 
 function util.GetLivingPlayers(class)
    local count = 0
-   local players = {}
    for k, v in ipairs(team.GetPlayers(class)) do
       if (v:Alive() and v:GetObserverMode() == OBS_MODE_NONE) then
          count = count + 1
-         players[ #players+1 ] = v
       end
    end
    
-   return count, players
+   return count
 end
 
 function GM:PlayerFootstep( ply, pos, foot, snd, vol )
