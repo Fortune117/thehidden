@@ -11,16 +11,16 @@ GM.RoundTime = 300 //Default: 300.
 GM.RoundLimit = 10  //How many rounds before a map change. Default: 10.
 GM.RoundEndTime = 15 //Default: 15. 
 GM.RoundPrepTimeCustom = 25 --Prep time if custom mode is enabled. This is high so the Hidden has time to select his stats. Default: 25.
-GM.RoundPrepTime = 15 --The round prep time if custom mode is disabled. Default: 15.
+GM.RoundPrepTime = 10 --The round prep time if custom mode is disabled. Default: 15.
 
 GM.SlowAmount = 0 //What the host timeframe is set to when the round ends. Set to 0 to disable. Default: 0.
 
 
 GM.Hidden = {}
 GM.Hidden.Name = "The Hidden" //The name displayed on the scoreboard. Default: "The Hidden".
-GM.Hidden.Strength = 10
+GM.Hidden.Strength = 10 
 GM.Hidden.Agility = 10
-GM.Hidden.Endurance = 10
+GM.Hidden.Endurance = 10 
 
 
 --Note: These are the base stats of the hidden. You only need to change these if you disable Custom Mode.
@@ -192,6 +192,15 @@ GM.Admin = {}
 GM.Admin.bShowOnScoreboard = true 
 GM.Admin.cScoreboardColor = Color( 255, 162, 0, 60 ) 
 GM.Admin.cScoreboardColor2 = { Color( 255, 255, 255, 255 ), Color( 255, 162, 0, 255 ), Color( 255, 162, 0, 255 ) }
+
+GM.LaserSightBlackList = --This is a blacklist of weapons that the laser sight shouldn't draw for. i.e Weapons that aren't guns (medkit, etc)
+{
+	"weapon_hdn_stimpack",
+	"weapon_hdn_mine",
+	"weapon_hdn_smine",
+	"weapon_hdn_ammobox",
+	"weapon_hdn_laser"
+}
 
 
 GM.InfoText = [[
