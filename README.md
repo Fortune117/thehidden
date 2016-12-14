@@ -2,7 +2,7 @@ The Hidden was orignially a source mod, it was released a long time ago and has 
 
 Thanks to: Mr. Gash - The round system I used was largely based on the one from his Deathrun gamemode. The Original Hidden Creators - Models for the hidden and his weapons. twoski - Numerous small amounts of code from his "The Stalker" gamemode.
 
-To install, just drag into your servers gamemodes folder. You may need to Copy the files from thehidde/content into your garrysmod/garrysmod directory for fastdl to work.
+To install, just drag into your servers gamemodes folder. You may need to Copy the files from thehidde/content into your garrysmod/garrysmod directory for fastdl to work. Also, you must rename the folder from 'thehidden-master' to 'thehidden' or else it WILL NOT WORK.
 
 Configuration: The gamemode comes with its own config file. Just edit config.lua to make any changes you'd like. I recommend checking this file before asking any questions about making changes or additions to the gamemode - it might already be there! If you have any requests for additional settings feel free to make a request.
 
