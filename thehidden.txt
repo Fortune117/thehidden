@@ -5,4 +5,6 @@
 	"maps"		"^ts_|^thestalker_|^hdn_|^ovr_"
 	"menusystem"	"1"
 	"settings"	""
+	"workshopid"	"443458575"
+	"category"	"pvp"
 }
