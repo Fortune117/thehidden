@@ -292,7 +292,7 @@ function GM:CanPlayerSuicide( ply )
 end
 
 function GM:PlayerNoClip( ply )
-	return not game.IsDedicated() or false 
+	return false 
 end
 
 local hidden_select_funcs = 
